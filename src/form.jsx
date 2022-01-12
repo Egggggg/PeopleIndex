@@ -29,6 +29,11 @@ export default function Form({ db }) {
 
 		if (e.target.type === "number") {
 			value = parseInt(e.target.value);
+		} else if (e.target.type === "date") {
+			const dateObj = new Date(e.target.value);
+
+			value = dateObj.getTime();
+			console.log(value);
 		}
 
 		setUser({ ...user, [field]: value });
