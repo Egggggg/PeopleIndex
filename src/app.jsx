@@ -3,7 +3,7 @@ import Dexie from "dexie";
 import Form from "./form";
 
 export default function App() {
-	const [db] = useState(new Dexie("UserData"));
+	const [db] = useState(new Dexie("PeopleIndexUserData"));
 
 	db.version(1).stores({
 		users:
