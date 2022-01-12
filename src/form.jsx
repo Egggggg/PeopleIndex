@@ -64,8 +64,12 @@ export default function Form({ db }) {
 			]
 		};
 
+		try {
 		const handle = await window.showSaveFilePicker(options);
 		return handle;
+		} catch {
+			return null;
+		}
 	}
 
 	function exportData() {
@@ -73,10 +77,13 @@ export default function Form({ db }) {
 			.toArray()
 			.then(async (data) => {
 				const handle = await getNewFileHandle();
+
+				if (handle) {
 				const writable = await handle.createWritable();
 
 				await writable.write(JSON.stringify(data, null, 2));
 				await writable.close();
+				}
 			});
 	}
 
