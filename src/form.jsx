@@ -116,12 +116,16 @@ export default function Form({ db }) {
 					placeholder="Birth Day"
 					name="birthDay"
 					onChange={handleChange}
+					max="31"
+					min="1"
 				/>
 				<input
 					type="number"
 					placeholder="Birth Month"
 					name="birthMonth"
 					onChange={handleChange}
+					max="12"
+					min="1"
 				/>
 				<br />
 				<input
