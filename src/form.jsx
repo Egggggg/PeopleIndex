@@ -52,6 +52,8 @@ export default function Form({ db }) {
 
 	async function getNewFileHandle() {
 		const options = {
+			suggestedName: "users.json",
+			startIn: "downloads",
 			types: [
 				{
 					description: "JSON Files",
