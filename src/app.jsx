@@ -11,8 +11,10 @@ export default function App() {
 	});
 
 	return (
-		<div>
-			<Form db={db} />
-		</div>
+		<React.StrictMode>
+			<div>
+				<Form db={db} />
+			</div>
+		</React.StrictMode>
 	);
 }
