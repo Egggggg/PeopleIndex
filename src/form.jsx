@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import UserList from "./userList";
+import React, { useState, useRef } from "react";
 
 export default function Form({ db }) {
 	const [user, setUser] = useState({
@@ -90,7 +89,9 @@ export default function Form({ db }) {
 
 	return (
 		<div>
-			<UserList db={db} />
+			<table>
+				<tbody>{users}</tbody>
+			</table>
 			<form onSubmit={handleSubmit}>
 				<input
 					type="text"
