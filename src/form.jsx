@@ -100,6 +100,10 @@ export default function Form({ db }) {
 			});
 	}
 
+	async function deleteUser(e) {
+		await db.users.delete(parseInt(e.target.id));
+		refresh();
+	}
 
 	function refresh() {
 		db.users.toArray().then((data) => {
@@ -146,6 +150,7 @@ export default function Form({ db }) {
 					placeholder="Name"
 					name="name"
 					onChange={handleChange}
+					value={user.name}
 				/>
 				<br />
 				<input
@@ -153,6 +158,7 @@ export default function Form({ db }) {
 					placeholder="Other Names"
 					name="pseudonyms"
 					onChange={handleChange}
+					value={user.pseudonyms}
 				/>
 				<br />
 				<input
@@ -160,6 +166,7 @@ export default function Form({ db }) {
 					placeholder="Age"
 					name="age"
 					onChange={handleChange}
+					value={user.age}
 				/>
 				<br />
 				<input
@@ -169,6 +176,7 @@ export default function Form({ db }) {
 					onChange={handleChange}
 					max="31"
 					min="1"
+					value={user.birthDay}
 				/>
 				<input
 					type="number"
@@ -177,6 +185,7 @@ export default function Form({ db }) {
 					onChange={handleChange}
 					max="12"
 					min="1"
+					value={user.birthMonth}
 				/>
 				<br />
 				<input
@@ -184,6 +193,7 @@ export default function Form({ db }) {
 					placeholder="Religion"
 					name="religion"
 					onChange={handleChange}
+					value={user.religion}
 				/>
 				<br />
 				<input
@@ -191,6 +201,7 @@ export default function Form({ db }) {
 					placeholder="Nationality"
 					name="nationality"
 					onChange={handleChange}
+					value={user.nationality}
 				/>
 				<br />
 				<input
@@ -198,15 +209,31 @@ export default function Form({ db }) {
 					placeholder="Heritage"
 					name="heritage"
 					onChange={handleChange}
+					value={user.heritage}
 				/>
 				<br />
 				<label htmlFor="firstMet">First Met: </label>
-				<input type="date" name="firstMet" onChange={handleChange} />
+				<input
+					type="date"
+					name="firstMet"
+					onChange={handleChange}
+					value={user.firstMetStr}
+				/>
 				<br />
 				<label htmlFor="lastSpoke">Last Spoke: </label>
-				<input type="date" name="lastSpoke" onInput={handleChange} />
+				<input
+					type="date"
+					name="lastSpoke"
+					onInput={handleChange}
+					value={user.lastSpokeStr}
+				/>
 				<br />
-				<textarea placeholder="Notes" name="notes" onChange={handleChange} />
+				<textarea
+					placeholder="Notes"
+					name="notes"
+					onChange={handleChange}
+					value={user.notes}
+				/>
 				<br />
 				<input type="submit" value="Submit" />
 			</form>
