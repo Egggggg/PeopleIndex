@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import UserList from "./users";
+import UserList from "./userList";
 
 export default function Form({ db }) {
 	const [user, setUser] = useState({
