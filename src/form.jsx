@@ -97,6 +97,39 @@ export default function Form({ db }) {
 		</div>
 	);
 }
+
+function createFields(user, setUser, fields) {
+	return fields.map((field) => {
+		const placeholder = field.placeholder;
+
+		let type = field.type || "text";
+		let name = field.name || placeholder.toLowerCase();
+		let value = field.value || user[name];
+		let br = field.br || false;
+
+		let label = field.label;
+		let min = field.min;
+		let max = field.max;
+
+		return (
+			<Field
+				placeholder={placeholder}
+				type={type}
+				name={name}
+				value={value}
+				label={label}
+				min={min}
+				max={max}
+				handleChange={handleChange}
+				user={user}
+				setUser={setUser}
+				br={br}
+				key={field.name}
+			/>
+		);
+	});
+}
+
 		setUser({
 			name: "",
 			pseudonyms: "",
