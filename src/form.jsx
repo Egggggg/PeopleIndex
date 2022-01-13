@@ -44,6 +44,8 @@ export default function Form({ db }) {
 		} else if (e.target.type === "date") {
 			const dateObj = new Date(e.target.value);
 
+			user[`${field}Str`] = value;
+
 			value = dateObj.getTime();
 			console.log(value);
 		}
