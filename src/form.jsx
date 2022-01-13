@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 
 export default function Form({ db }) {
 	const [user, setUser] = useState({
