@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Field from "./field";
 
 export default function Form({ db }) {
 	const [user, setUser] = useState({
@@ -17,8 +18,85 @@ export default function Form({ db }) {
 	});
 
 	const [users, setUsers] = useState([]);
+	const fields = [
+		{
+			placeholder: "Name",
+			br: true
+		},
+		{
+			placeholder: "Other Names",
+			name: "pseudonyms",
+			br: true
+		},
+		{
+			type: "number",
+			placeholder: "Age",
+			br: true
+		},
+		{
+			type: "number",
+			placeholder: "Birth Day",
+			name: "birthDay",
+			min: "1",
+			max: "31"
+		},
+		{
+			type: "number",
+			placeholder: "Birth Month",
+			name: "birthMonth",
+			min: "1",
+			max: "12",
+			br: true
+		},
+		{
+			placeholder: "Religion",
+			br: true
+		},
+		{
+			placeholder: "Nationality",
+			br: true
+		},
+		{
+			placeholder: "Heritage",
+			br: true
+		},
+		{
+			label: "First Met: ",
+			type: "date",
+			name: "firstMet",
+			value: user.firstMetStr,
+			br: true
+		},
+		{
+			label: "Last Spoke: ",
+			type: "date",
+			name: "lastSpoke",
+			value: user.lastSpokeStr,
+			br: true
+		},
+		{
+			type: "textarea",
+			placeholder: "Notes"
+		}
+	];
 
-	function clearData() {
+	const fieldElements = createFields(user, setUser, fields);
+
+	refresh(setUsers, db);
+
+	return (
+		<div>
+			<table>
+				<tbody>{users}</tbody>
+			</table>
+			<form onSubmit={handleSubmit}>
+				{fieldElements}
+				<input type="submit" value="Submit" />
+			</form>
+			<button onClick={exportData}>Export</button>
+		</div>
+	);
+}
 		setUser({
 			name: "",
 			pseudonyms: "",
