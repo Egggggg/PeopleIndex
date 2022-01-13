@@ -3,23 +3,33 @@ import React, { useState, useRef } from "react";
 export default function Form({ db }) {
 	const [user, setUser] = useState({
 		name: "",
-		age: -1,
-		birthDay: 0,
-		birthMonth: 0,
 		pseudonyms: "",
-		firstMet: 0,
-		lastSpoke: 0
+		age: "",
+		birthDay: "",
+		birthMonth: "",
+		religion: "",
+		nationality: "",
+		heritage: "",
+		firstMet: "",
+		firstMetStr: "",
+		lastSpoke: "",
+		lastSpokeStr: ""
 	});
 
 	function clearData() {
 		setUser({
 			name: "",
-			age: -1,
-			birthDay: 0,
-			birthMonth: 0,
 			pseudonyms: "",
-			firstMet: 0,
-			lastSpoke: 0
+			age: "",
+			birthDay: "",
+			birthMonth: "",
+			religion: "",
+			nationality: "",
+			heritage: "",
+			firstMet: "",
+			firstMetStr: "",
+			lastSpoke: "",
+			lastSpokeStr: ""
 		});
 	}
 
