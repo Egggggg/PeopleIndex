@@ -16,6 +16,8 @@ export default function Form({ db }) {
 		lastSpokeStr: ""
 	});
 
+	const [users, setUsers] = useState([]);
+
 	function clearData() {
 		setUser({
 			name: "",
@@ -52,6 +54,7 @@ export default function Form({ db }) {
 	function handleSubmit(e) {
 		e.preventDefault();
 		db.users.add(user);
+		refresh();
 		clearData();
 	}
 
@@ -96,6 +99,41 @@ export default function Form({ db }) {
 				}
 			});
 	}
+
+
+	function refresh() {
+		db.users.toArray().then((data) => {
+			const users = data.map((user) => {
+				const now = Date.now();
+				let sinceSpoke = now - user.lastSpoke;
+
+				sinceSpoke = Math.floor(sinceSpoke / (1000 * 3600 * 24));
+
+				let lastSpoke = new Date(user.lastSpoke);
+
+				lastSpoke = `${
+					lastSpoke.getMonth() + 1
+				}-${lastSpoke.getDate()}-${lastSpoke.getFullYear()}`;
+
+				return (
+					<tr key={user.id}>
+						<td id={`name-${user.id}`}>{user.name}</td>
+						<td id={`since-${user.id}`}>{sinceSpoke}</td>
+						<td id={`last-${user.id}`}>{lastSpoke}</td>
+						<td>
+							<button onClick={deleteUser} id={user.id}>
+								Delete
+							</button>
+						</td>
+					</tr>
+				);
+			});
+
+			setUsers(users);
+		});
+	}
+
+	refresh();
 
 	return (
 		<div>
