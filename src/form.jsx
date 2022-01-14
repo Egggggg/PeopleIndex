@@ -98,6 +98,36 @@ export default function Form({ db }) {
 	);
 }
 
+const handleChange = (user, setUser) => (e) => {
+	const field = e.target.name;
+	let value = e.target.value;
+
+	if (e.target.type === "number") {
+		value = parseInt(e.target.value);
+	} else if (e.target.type === "date") {
+		const dateObj = new Date(e.target.value);
+
+		setUser({ ...user, [`${field}Str`]: value });
+
+		value = dateObj.getTime();
+		console.log(value);
+	}
+
+	setUser({ ...user, [field]: value });
+};
+
+const handleSubmit = (db, user) => (e) => {
+	e.preventDefault();
+	db.users.add(user);
+	refresh();
+	clearData();
+};
+
+const deleteUser = (db) => async (e) => {
+	await db.users.delete(parseInt(e.target.id));
+	refresh();
+};
+
 function createFields(user, setUser, fields) {
 	return fields.map((field) => {
 		const placeholder = field.placeholder;
@@ -147,31 +177,6 @@ function clearData(setUser) {
 	});
 }
 
-const handleChange = (user, setUser) => (e) => {
-	const field = e.target.name;
-	let value = e.target.value;
-
-	if (e.target.type === "number") {
-		value = parseInt(e.target.value);
-	} else if (e.target.type === "date") {
-		const dateObj = new Date(e.target.value);
-
-		setUser({ ...user, [`${field}Str`]: value });
-
-		value = dateObj.getTime();
-		console.log(value);
-	}
-
-	setUser({ ...user, [field]: value });
-};
-
-const handleSubmit = (db, user) => (e) => {
-	e.preventDefault();
-	db.users.add(user);
-	refresh();
-	clearData();
-};
-
 async function getNewFileHandle() {
 	const options = {
 		suggestedName: "users.json",
@@ -208,11 +213,6 @@ function exportData(db) {
 			}
 		});
 }
-
-const deleteUser = (db) => async (e) => {
-	await db.users.delete(parseInt(e.target.id));
-	refresh();
-};
 
 function refresh(setUsers, db) {
 	db.users.toArray().then((data) => {
