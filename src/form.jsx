@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 
 export default function Form({ db }) {
+	useEffect(() => {
+		db.version(1).stores({
+			users:
+				"++id, name, age, birthDay, birthMonth, pseudonyms, firstMet, lastSpoke"
+		});
+	}, [db]);
+
 	const [user, setUser] = useState({
 		name: "",
 		pseudonyms: "",
