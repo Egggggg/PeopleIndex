@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Field from "./field";
 
 export default function Form({ db }) {
 	const [user, setUser] = useState({
@@ -18,69 +17,6 @@ export default function Form({ db }) {
 	});
 
 	const [users, setUsers] = useState([]);
-	const fields = [
-		{
-			placeholder: "Name",
-			br: true
-		},
-		{
-			placeholder: "Other Names",
-			name: "pseudonyms",
-			br: true
-		},
-		{
-			type: "number",
-			placeholder: "Age",
-			br: true
-		},
-		{
-			type: "number",
-			placeholder: "Birth Day",
-			name: "birthDay",
-			min: "1",
-			max: "31"
-		},
-		{
-			type: "number",
-			placeholder: "Birth Month",
-			name: "birthMonth",
-			min: "1",
-			max: "12",
-			br: true
-		},
-		{
-			placeholder: "Religion",
-			br: true
-		},
-		{
-			placeholder: "Nationality",
-			br: true
-		},
-		{
-			placeholder: "Heritage",
-			br: true
-		},
-		{
-			label: "First Met: ",
-			type: "date",
-			name: "firstMet",
-			value: user.firstMetStr,
-			br: true
-		},
-		{
-			label: "Last Spoke: ",
-			type: "date",
-			name: "lastSpoke",
-			value: user.lastSpokeStr,
-			br: true
-		},
-		{
-			type: "textarea",
-			placeholder: "Notes"
-		}
-	];
-
-	const fieldElements = createFields(user, setUser, fields);
 
 	refresh(setUsers, db);
 
@@ -90,7 +26,96 @@ export default function Form({ db }) {
 				<tbody>{users}</tbody>
 			</table>
 			<form onSubmit={handleSubmit}>
-				{fieldElements}
+				<input
+					type="text"
+					placeholder="Name"
+					name="name"
+					onChange={handleChange(user, setUser)}
+					value={user.name}
+				/>
+				<br />
+				<input
+					type="text"
+					placeholder="Other Names"
+					name="pseudonyms"
+					onChange={handleChange(user, setUser)}
+					value={user.pseudonyms}
+				/>
+				<br />
+				<input
+					type="number"
+					placeholder="Age"
+					name="age"
+					onChange={handleChange(user, setUser)}
+					value={user.age}
+				/>
+				<br />
+				<input
+					type="number"
+					placeholder="Birth Day"
+					name="birthDay"
+					onChange={handleChange(user, setUser)}
+					max="31"
+					min="1"
+					value={user.birthDay}
+				/>
+				<input
+					type="number"
+					placeholder="Birth Month"
+					name="birthMonth"
+					onChange={handleChange(user, setUser)}
+					max="12"
+					min="1"
+					value={user.birthMonth}
+				/>
+				<br />
+				<input
+					type="text"
+					placeholder="Religion"
+					name="religion"
+					onChange={handleChange(user, setUser)}
+					value={user.religion}
+				/>
+				<br />
+				<input
+					type="text"
+					placeholder="Nationality"
+					name="nationality"
+					onChange={handleChange(user, setUser)}
+					value={user.nationality}
+				/>
+				<br />
+				<input
+					type="text"
+					placeholder="Heritage"
+					name="heritage"
+					onChange={handleChange(user, setUser)}
+					value={user.heritage}
+				/>
+				<br />
+				<label htmlFor="firstMet">First Met: </label>
+				<input
+					type="date"
+					name="firstMet"
+					onChange={handleChange(user, setUser)}
+					value={user.firstMetStr}
+				/>
+				<br />
+				<label htmlFor="lastSpoke">Last Spoke: </label>
+				<input
+					type="date"
+					name="lastSpoke"
+					onInput={handleChange(user, setUser)}
+					value={user.lastSpokeStr}
+				/>
+				<br />
+				<textarea
+					placeholder="Notes"
+					name="notes"
+					onChange={handleChange(user, setUser)}
+					value={user.notes}
+				/>
+				<br />
 				<input type="submit" value="Submit" />
 			</form>
 			<button onClick={exportData}>Export</button>
@@ -127,38 +152,6 @@ const deleteUser = (db) => async (e) => {
 	await db.users.delete(parseInt(e.target.id));
 	refresh();
 };
-
-function createFields(user, setUser, fields) {
-	return fields.map((field) => {
-		const placeholder = field.placeholder;
-
-		let type = field.type || "text";
-		let name = field.name || placeholder.toLowerCase();
-		let value = field.value || user[name];
-		let br = field.br || false;
-
-		let label = field.label;
-		let min = field.min;
-		let max = field.max;
-
-		return (
-			<Field
-				placeholder={placeholder}
-				type={type}
-				name={name}
-				value={value}
-				label={label}
-				min={min}
-				max={max}
-				handleChange={handleChange}
-				user={user}
-				setUser={setUser}
-				br={br}
-				key={field.name}
-			/>
-		);
-	});
-}
 
 function clearData(setUser) {
 	setUser({
