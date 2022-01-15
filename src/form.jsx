@@ -153,16 +153,11 @@ const handleChange = (user, setUser) => (e) => {
 	setUser({ ...user, ...newData });
 };
 
-const handleSubmit = (db, user) => (e) => {
+const handleSubmit = (db, user, setUsers, setUser) => (e) => {
 	e.preventDefault();
 	db.users.add(user);
-	refresh();
-	clearData();
-};
-
-const deleteUser = (db) => async (e) => {
-	await db.users.delete(parseInt(e.target.id));
-	refresh();
+	refresh(setUsers, db);
+	clearData(setUser);
 };
 
 function clearData(setUser) {
