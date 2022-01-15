@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Form({ db }) {
 	const [user, setUser] = useState({
@@ -18,7 +18,9 @@ export default function Form({ db }) {
 
 	const [users, setUsers] = useState([]);
 
-	refresh(setUsers, db);
+	useEffect(() => {
+		refresh(setUsers, db);
+	}, [db]);
 
 	return (
 		<div>
