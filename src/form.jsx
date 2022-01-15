@@ -20,7 +20,8 @@ export default function Form({ db }) {
 		firstMet: "",
 		firstMetStr: "",
 		lastSpoke: "",
-		lastSpokeStr: ""
+		lastSpokeStr: "",
+		notes: ""
 	});
 
 	const [users, setUsers] = useState([]);
@@ -177,7 +178,8 @@ function clearData(setUser) {
 		firstMet: "",
 		firstMetStr: "",
 		lastSpoke: "",
-		lastSpokeStr: ""
+		lastSpokeStr: "",
+		notes: ""
 	});
 }
 
