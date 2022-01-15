@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export default function Form({ db }) {
+export default function Form({ db, refresh }) {
 	useEffect(() => {
 		db.version(1).stores({
 			users:
