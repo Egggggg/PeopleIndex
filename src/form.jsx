@@ -139,9 +139,10 @@ const handleChange = (user, setUser) => (e) => {
 	let value = e.target.value;
 
 	if (e.target.type === "number") {
-		value = parseInt(e.target.value);
+		value = parseInt(value);
+
 	} else if (e.target.type === "date") {
-		const dateObj = new Date(e.target.value);
+		const dateObj = new Date(value);
 
 		newData[`${field}Str`] = value;
 
