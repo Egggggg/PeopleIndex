@@ -35,7 +35,7 @@ export default function Form({ db }) {
 			<table>
 				<tbody>{users}</tbody>
 			</table>
-			<form onSubmit={handleSubmit(db, user)}>
+			<form onSubmit={handleSubmit(db, user, setUsers, setUser)}>
 				<input
 					type="text"
 					placeholder="Name"
