@@ -126,6 +126,7 @@ export default function Form({ db }) {
 }
 
 const handleChange = (user, setUser) => (e) => {
+	const newData = {};
 	const field = e.target.name;
 	let value = e.target.value;
 
@@ -134,13 +135,14 @@ const handleChange = (user, setUser) => (e) => {
 	} else if (e.target.type === "date") {
 		const dateObj = new Date(e.target.value);
 
-		setUser({ ...user, [`${field}Str`]: value });
+		newData[`${field}Str`] = value;
 
 		value = dateObj.getTime();
-		console.log(value);
 	}
 
-	setUser({ ...user, [field]: value });
+	newData[field] = value;
+
+	setUser({ ...user, ...newData });
 };
 
 const handleSubmit = (db, user) => (e) => {
