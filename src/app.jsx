@@ -10,8 +10,8 @@ export default function App() {
 	return (
 		<React.StrictMode>
 			<div>
-				<UserList list={userList} />
-				<Form db={db} />
+				<UserList db={db} users={users} setUsers={setUsers} />
+				<Form db={db} refresh={refresh} />
 				<UserInfo db={db} />
 			</div>
 		</React.StrictMode>
