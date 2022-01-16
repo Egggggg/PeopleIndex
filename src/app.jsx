@@ -23,6 +23,21 @@ export default function App({ db }) {
 	);
 }
 
+async function getDateFormat(db, userId = -1, defaultFormat = -1) {
+	let userDateFormat;
+	let defaultDateFormat = defaultFormat;
+
+	if (userId !== -1) {
+		userDateFormat = await db.settings.get(userId)?.dateFormat;
+	}
+
+	if (defaultFormat === -1) {
+		defaultDateFormat = await db.defaults.get(0).dateFormat;
+	}
+
+	return userDateFormat ? userDateFormat : defaultDateFormat;
+}
+
 const refresh = (setUsers, setSelectedUser, db) => async () => {
 	const now = Date.now();
 	const data = await db.users.toArray();
