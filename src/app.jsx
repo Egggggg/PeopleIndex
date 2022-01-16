@@ -69,6 +69,7 @@ const refresh = (setUsers, setSelectedUser, db) => async () => {
 		});
 
 		setUsers(users);
+};
 
 const selectUser = (setSelectedUser, db, userid) => async (e) => {
 	const userData = await db.users.get({ id: userid });
