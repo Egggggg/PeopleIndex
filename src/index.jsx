@@ -65,8 +65,3 @@ async function main() {
 		</React.StrictMode>,
 		document.getElementById("root")
 	);
-
-	serviceWorker.register();
-}
-
-main();
