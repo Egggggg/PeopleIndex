@@ -40,35 +40,35 @@ export default function App() {
 
 const refresh = (setUsers, setSelectedUser, db) => async () => {
 	const data = await db.users.toArray();
-		const users = data.map((user) => {
-			const now = Date.now();
-			let sinceSpoke = now - user.lastSpoke;
+	const users = data.map((user) => {
+		const now = Date.now();
+		let sinceSpoke = now - user.lastSpoke;
 
-			sinceSpoke = Math.floor(sinceSpoke / (1000 * 3600 * 24));
+		sinceSpoke = Math.floor(sinceSpoke / (1000 * 3600 * 24));
 
-			let lastSpoke = new Date(user.lastSpoke);
+		let lastSpoke = new Date(user.lastSpoke);
 
-			lastSpoke = `${
-				lastSpoke.getMonth() + 1
-			}-${lastSpoke.getDate()}-${lastSpoke.getFullYear()}`;
+		lastSpoke = `${
+			lastSpoke.getMonth() + 1
+		}-${lastSpoke.getDate()}-${lastSpoke.getFullYear()}`;
 
-			return (
-				<tr key={user.id}>
+		return (
+			<tr key={user.id}>
 				<td id={`name-${user.id}`}>
 					<button onClick={selectUser(setSelectedUser, db, user.id)}>
 						{user.name}
 					</button>
 				</td>
-					<td id={`since-${user.id}`}>{sinceSpoke}</td>
-					<td id={`last-${user.id}`}>{lastSpoke}</td>
+				<td id={`since-${user.id}`}>{sinceSpoke}</td>
+				<td id={`last-${user.id}`}>{lastSpoke}</td>
 				<td id={`delete-${user.id}`}>
 					<button onClick={deleteUser(setUsers, db, user.id)}>Delete</button>
-					</td>
-				</tr>
-			);
-		});
+				</td>
+			</tr>
+		);
+	});
 
-		setUsers(users);
+	setUsers(users);
 };
 
 const selectUser = (setSelectedUser, db, userid) => async (e) => {
@@ -76,7 +76,7 @@ const selectUser = (setSelectedUser, db, userid) => async (e) => {
 
 	if (userData.birthDay !== "" && userData.birthMonth !== "") {
 		userData["birthDate"] = `${userData.birthDay - userData.birthMonth}`;
-}
+	}
 
 	setSelectedUser(userData);
 };
