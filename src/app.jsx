@@ -96,6 +96,33 @@ const selectUser = (setSelectedUser, db) => (userId) => async (e) => {
 		}
 	}
 
+	const firstMet = new Date(userData.firstMet);
+	const lastSpoke = new Date(userData.lastSpoke);
+
+	if (dateFormat === "en_US") {
+		userData.firstMetStr = firstMet
+			? `${
+					firstMet.getUTCMonth() + 1
+			  }-${firstMet.getUTCDate()}-${firstMet.getUTCFullYear()}`
+			: undefined;
+		userData.lastSpokeStr = lastSpoke
+			? `${
+					lastSpoke.getUTCMonth() + 1
+			  }-${lastSpoke.getUTCDate()}-${lastSpoke.getUTCFullYear()}`
+			: undefined;
+	} else {
+		userData.firstMetStr = firstMet
+			? `${firstMet.getUTCDate()}-${
+					firstMet.getUTCMonth() + 1
+			  }-${firstMet.getUTCFullYear()}`
+			: undefined;
+		userData.lastSpokeStr = lastSpoke
+			? `${lastSpoke.getUTCDate()}-${
+					lastSpoke.getUTCMonth() + 1
+			  }-${lastSpoke.getUTCFullYear()}`
+			: undefined;
+	}
+
 	setSelectedUser(userData);
 };
 
