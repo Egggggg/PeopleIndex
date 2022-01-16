@@ -44,10 +44,7 @@ export default function Form({ db, refresh }) {
 
 	return (
 		<div>
-			<table>
-				<tbody>{users}</tbody>
-			</table>
-			<form onSubmit={handleSubmit(db, user, setUsers, setUser)}>
+			<form onSubmit={handleSubmit(db, user, refresh, setUser)}>
 				<input
 					type="text"
 					placeholder="Name"
