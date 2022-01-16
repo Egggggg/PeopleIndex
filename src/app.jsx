@@ -3,6 +3,25 @@ import Form from "./form";
 import UserList from "./userList";
 import UserInfo from "./userInfo";
 
+const order = [
+	"name:::::Name",
+	"pseudonyms:::::Other Names",
+	"age:::::Age",
+	"birthDate:::::Birthday",
+	"religion:::::Religion",
+	"nationality:::::Nationality",
+	"heritage:::::Heritage",
+	"firstMetStr:::::First Met",
+	"lastSpokeStr:::::Last Spoke",
+	"notes:::::Notes"
+];
+const dateOptions = {
+	timeZone: "UTC",
+	month: "numeric",
+	day: "numeric",
+	year: "numeric"
+};
+
 export default function App({ db }) {
 	const [users, setUsers] = useState([]);
 	const [selectedUser, setSelectedUser] = useState({});
