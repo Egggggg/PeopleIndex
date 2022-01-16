@@ -45,7 +45,11 @@ const refresh = (setUsers, setUser, db) => async () => {
 
 			return (
 				<tr key={user.id}>
-					<td id={`name-${user.id}`}>{user.name}</td>
+				<td id={`name-${user.id}`}>
+					<button onClick={selectUser(setUser, db)} userId={user.id}>
+						{user.name}
+					</button>
+				</td>
 					<td id={`since-${user.id}`}>{sinceSpoke}</td>
 					<td id={`last-${user.id}`}>{lastSpoke}</td>
 					<td>
