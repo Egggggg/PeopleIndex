@@ -26,17 +26,27 @@ export default function App({ db }) {
 const refresh = (setUsers, setSelectedUser, db) => async () => {
 	const now = Date.now();
 	const data = await db.users.toArray();
-	const users = data.map((user) => {
-		const now = Date.now();
+
+	let defaultDateFormat = await db.defaults.get({ id: 0 });
+	defaultDateFormat = defaultDateFormat.dateFormat;
+		const userDateFormat = await db.settings.get({ id: user.id })?.dateFormat;
+		const dateFormat = userDateFormat ? userDateFormat : defaultDateFormat;
+
 		let sinceSpoke = now - user.lastSpoke;
 
 		sinceSpoke = Math.floor(sinceSpoke / (1000 * 3600 * 24));
 
 		let lastSpoke = new Date(user.lastSpoke);
 
-		lastSpoke = `${
-			lastSpoke.getMonth() + 1
-		}-${lastSpoke.getDate()}-${lastSpoke.getFullYear()}`;
+		if (dateFormat === "en_US") {
+			lastSpoke = `${
+				lastSpoke.getUTCMonth() + 1
+			}-${lastSpoke.getUTCDate()}-${lastSpoke.getUTCFullYear()}`;
+		} else {
+			lastSpoke = `${lastSpoke.getUTCDate()}-${
+				lastSpoke.getUTCMonth() + 1
+			}-${lastSpoke.getUTCFullYear()}`;
+		}
 
 		return (
 			<tr key={user.id}>
