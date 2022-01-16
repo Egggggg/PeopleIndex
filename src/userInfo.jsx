@@ -8,12 +8,16 @@ export default function UserInfo({ user }) {
 	const fields = user.order.map((field) => {
 		const [slug, fieldDisplay] = field.split(":::::");
 
-		return (
-			<div key={slug}>
-				<h3>{fieldDisplay}</h3>
-				<p>{user[slug]}</p>
-			</div>
-		);
+		if (!user[slug]) {
+			return <div key={slug}></div>;
+		} else {
+			return (
+				<div key={slug}>
+					<h3>{fieldDisplay}</h3>
+					<p>{user[slug]}</p>
+				</div>
+			);
+		}
 	});
 
 	return fields;
