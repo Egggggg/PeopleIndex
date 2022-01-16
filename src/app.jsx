@@ -7,13 +7,23 @@ import UserInfo from "./userInfo";
 export default function App() {
 	const [db] = useState(new Dexie("PeopleIndexUserData"));
 	const [users, setUsers] = useState([]);
+	const [selectedUser, setSelectedUser] = useState({});
 
 	return (
 		<React.StrictMode>
 			<div>
-				<UserList db={db} users={users} setUsers={setUsers} />
-				<Form db={db} refresh={refresh} />
-				<UserInfo db={db} />
+				<UserList
+					db={db}
+					users={users}
+					setUsers={setUsers}
+					setUser={setSelectedUser}
+				/>
+				<Form
+					db={db}
+					refresh={refresh(setUsers, setSelectedUser, db)}
+					setSelectedUser={setSelectedUser}
+				/>
+				<UserInfo user={selectedUser} />
 			</div>
 		</React.StrictMode>
 	);
