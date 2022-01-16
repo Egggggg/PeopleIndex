@@ -72,7 +72,8 @@ const refresh = (setUsers, setSelectedUser, db) => async () => {
 	});
 }
 
-const deleteUser = (setUsers, db) => async (e) => {
-	await db.users.delete(parseInt(e.target.id));
+
+const deleteUser = (setUsers, db, userid) => async (e) => {
+	await db.users.delete(parseInt(userid));
 	refresh(setUsers, db);
 };
