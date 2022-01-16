@@ -53,7 +53,7 @@ const refresh = (setUsers, setSelectedUser, db) => async () => {
 		return (
 			<tr key={user.id}>
 				<td id={`name-${user.id}`}>
-					<button onClick={selectUser(setSelectedUser, db, user.id)}>
+					<button onClick={selectUser(setSelectedUser, db)(user.id)}>
 						{user.name}
 					</button>
 				</td>
@@ -71,8 +71,7 @@ const refresh = (setUsers, setSelectedUser, db) => async () => {
 	});
 };
 
-const selectUser = (setSelectedUser, db, userid) => async (e) => {
-	const userData = await db.users.get({ id: userid });
+const selectUser = (setSelectedUser, db) => (userId) => async (e) => {
 
 	if (userData.birthDay !== "" && userData.birthMonth !== "") {
 		userData["birthDate"] = `${userData.birthDay - userData.birthMonth}`;
