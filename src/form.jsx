@@ -21,7 +21,19 @@ export default function Form({ db, refresh }) {
 		firstMetStr: "",
 		lastSpoke: "",
 		lastSpokeStr: "",
-		notes: ""
+		notes: "",
+		order: [
+			"name",
+			"pseudonyms",
+			"age",
+			"birthdate",
+			"religion",
+			"nationality",
+			"heritage",
+			"firstMetStr",
+			"lastSpokeStr",
+			"notes"
+		]
 	});
 
 	const [users, setUsers] = useState([]);
