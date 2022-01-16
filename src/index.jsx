@@ -36,7 +36,7 @@ class ErrorBoundary extends React.Component {
 }
 
 async function main() {
-const db = new Dexie("PeopleIndexUserData");
+	const db = new Dexie("PeopleIndexUserData");
 
 db.version(2).stores({
 	users:
