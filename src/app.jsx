@@ -24,6 +24,7 @@ export default function App({ db }) {
 }
 
 const refresh = (setUsers, setSelectedUser, db) => async () => {
+	const now = Date.now();
 	const data = await db.users.toArray();
 	const users = data.map((user) => {
 		const now = Date.now();
