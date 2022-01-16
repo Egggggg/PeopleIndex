@@ -52,10 +52,8 @@ const refresh = (setUsers, setUser, db) => async () => {
 				</td>
 					<td id={`since-${user.id}`}>{sinceSpoke}</td>
 					<td id={`last-${user.id}`}>{lastSpoke}</td>
-					<td>
-						<button onClick={deleteUser(setUsers, db)} id={user.id}>
-							Delete
-						</button>
+				<td id={`delete-${user.id}`}>
+					<button onClick={deleteUser(setUsers, db)}>Delete</button>
 					</td>
 				</tr>
 			);
