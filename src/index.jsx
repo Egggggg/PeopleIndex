@@ -4,6 +4,7 @@ import App from "./app";
 import Dexie from "dexie";
 import * as serviceWorker from "./serviceWorkerRegistration";
 
+async function main() {
 const db = new Dexie("PeopleIndexUserData");
 
 db.version(2).stores({
@@ -23,4 +24,7 @@ db.version(2).stores({
 		document.getElementById("root")
 	);
 
-serviceWorker.register();
+	serviceWorker.register();
+}
+
+main();
