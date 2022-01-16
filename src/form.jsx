@@ -16,16 +16,16 @@ export default function Form({ db, refresh }) {
 		lastSpokeStr: "",
 		notes: "",
 		order: [
-			"name",
-			"pseudonyms",
-			"age",
-			"birthdate",
-			"religion",
-			"nationality",
-			"heritage",
-			"firstMetStr",
-			"lastSpokeStr",
-			"notes"
+			"name:::::Name",
+			"pseudonyms:::::Other Names",
+			"age:::::Age",
+			"birthDate:::::Birthday",
+			"religion:::::Religion",
+			"nationality:::::Nationality",
+			"heritage:::::Heritage",
+			"firstMetStr:::::First Met",
+			"lastSpokeStr:::::Last Spoke",
+			"notes:::::Notes"
 		]
 	});
 
