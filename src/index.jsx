@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./app";
 import Dexie from "dexie";
-import * as serviceWorker from "./serviceWorkerRegistration";
 
 class ErrorBoundary extends React.Component {
 	constructor(props) {
