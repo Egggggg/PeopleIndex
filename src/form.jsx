@@ -199,12 +199,12 @@ async function getNewFileHandle() {
 async function exportData(db) {
 	const data = await db.table("users").toArray();
 
-			const handle = await getNewFileHandle();
+	const handle = await getNewFileHandle();
 
-			if (handle) {
-				const writable = await handle.createWritable();
+	if (handle) {
+		const writable = await handle.createWritable();
 
-				await writable.write(JSON.stringify(data, null, 2));
-				await writable.close();
-			}
+		await writable.write(JSON.stringify(data, null, 2));
+		await writable.close();
+	}
 }
