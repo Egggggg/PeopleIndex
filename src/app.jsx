@@ -29,6 +29,8 @@ const refresh = (setUsers, setSelectedUser, db) => async () => {
 
 	let defaultDateFormat = await db.defaults.get({ id: 0 });
 	defaultDateFormat = defaultDateFormat.dateFormat;
+
+	const promises = data.map(async (user) => {
 		const userDateFormat = await db.settings.get({ id: user.id })?.dateFormat;
 		const dateFormat = userDateFormat ? userDateFormat : defaultDateFormat;
 
@@ -64,7 +66,9 @@ const refresh = (setUsers, setSelectedUser, db) => async () => {
 		);
 	});
 
-	setUsers(users);
+	Promise.all(promises).then((users) => {
+		setUsers(users);
+	});
 };
 
 const selectUser = (setSelectedUser, db, userid) => async (e) => {
