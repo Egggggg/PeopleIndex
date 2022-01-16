@@ -42,18 +42,16 @@ const refresh = (setUsers, setSelectedUser, db) => async () => {
 	const now = Date.now();
 	const data = await db.users.toArray();
 
-	let defaultDateFormat = await db.defaults.get({ id: 0 });
-	defaultDateFormat = defaultDateFormat.dateFormat;
+	let defaultDateFormat = await db.defaults.get(0).dateFormat;
 
 	const promises = data.map(async (user) => {
-		const userDateFormat = await db.settings.get({ id: user.id })?.dateFormat;
-		const dateFormat = userDateFormat ? userDateFormat : defaultDateFormat;
-
 		let sinceSpoke = now - user.lastSpoke;
 
 		sinceSpoke = Math.floor(sinceSpoke / (1000 * 3600 * 24));
 
 		let lastSpoke = new Date(user.lastSpoke);
+
+		const dateFormat = await getDateFormat(db, user.id, defaultDateFormat);
 
 		if (dateFormat === "en_US") {
 			lastSpoke = `${
