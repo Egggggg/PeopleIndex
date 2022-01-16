@@ -43,26 +43,9 @@ export default function App({ db }) {
 	);
 }
 
-async function getDateFormat(db, userId = -1, defaultFormat = -1) {
-	let userDateFormat;
-	let defaultDateFormat = defaultFormat;
-
-	if (userId !== -1) {
-		userDateFormat = await db.settings.get(userId)?.dateFormat;
-	}
-
-	if (defaultFormat === -1) {
-		defaultDateFormat = await db.defaults.get(0).dateFormat;
-	}
-
-	return userDateFormat ? userDateFormat : defaultDateFormat;
-}
-
 const refresh = (setUsers, setSelectedUser, db) => async () => {
 	const now = Date.now();
 	const data = await db.users.toArray();
-
-	let defaultDateFormat = await db.defaults.get(0).dateFormat;
 
 	const promises = data.map(async (user) => {
 		let sinceSpoke = now - user.lastSpoke;
@@ -71,17 +54,7 @@ const refresh = (setUsers, setSelectedUser, db) => async () => {
 
 		let lastSpoke = new Date(user.lastSpoke);
 
-		const dateFormat = await getDateFormat(db, user.id, defaultDateFormat);
-
-		if (dateFormat === "en_US") {
-			lastSpoke = `${
-				lastSpoke.getUTCMonth() + 1
-			}-${lastSpoke.getUTCDate()}-${lastSpoke.getUTCFullYear()}`;
-		} else {
-			lastSpoke = `${lastSpoke.getUTCDate()}-${
-				lastSpoke.getUTCMonth() + 1
-			}-${lastSpoke.getUTCFullYear()}`;
-		}
+		lastSpoke = lastSpoke.toLocaleDateString(undefined, dateOptions);
 
 		return (
 			<tr key={user.id}>
@@ -106,41 +79,34 @@ const refresh = (setUsers, setSelectedUser, db) => async () => {
 
 const selectUser = (setSelectedUser, db) => (userId) => async (e) => {
 	const userData = await db.users.get({ id: userId });
-	const dateFormat = await getDateFormat(db, userData.id);
 
-	if (userData.birthDay !== "" && userData.birthMonth !== "") {
-		if (dateFormat === "en_US") {
-			userData.birthDate = `${userData.birthMonth}-${userData.birthDay}`;
-		} else {
-			userData.birthDate = `${userData.birthDay}-${userData.birthMonth}`;
-		}
+	if (userData.birthMonth && userData.birthDay) {
+		const birthDate = new Date(`${userData.birthMonth}-${userData.birthDay}`);
+
+		userData.birthDate = birthDate.toLocaleDateString(undefined, {
+			timeZone: "UTC",
+			month: "numeric",
+			day: "numeric"
+		});
 	}
 
-	const firstMet = new Date(userData.firstMet);
-	const lastSpoke = new Date(userData.lastSpoke);
+	if (userData.firstMet) {
+		const firstMet = new Date(userData.firstMet);
 
-	if (dateFormat === "en_US") {
-		userData.firstMetStr = firstMet
-			? `${
-					firstMet.getUTCMonth() + 1
-			  }-${firstMet.getUTCDate()}-${firstMet.getUTCFullYear()}`
-			: undefined;
-		userData.lastSpokeStr = lastSpoke
-			? `${
-					lastSpoke.getUTCMonth() + 1
-			  }-${lastSpoke.getUTCDate()}-${lastSpoke.getUTCFullYear()}`
-			: undefined;
-	} else {
-		userData.firstMetStr = firstMet
-			? `${firstMet.getUTCDate()}-${
-					firstMet.getUTCMonth() + 1
-			  }-${firstMet.getUTCFullYear()}`
-			: undefined;
-		userData.lastSpokeStr = lastSpoke
-			? `${lastSpoke.getUTCDate()}-${
-					lastSpoke.getUTCMonth() + 1
-			  }-${lastSpoke.getUTCFullYear()}`
-			: undefined;
+		userData.firstMetStr = firstMet.toLocaleDateString(undefined, dateOptions);
+	}
+
+	if (userData.lastSpoke) {
+		const lastSpoke = new Date(userData.lastSpoke);
+
+		userData.lastSpokeStr = lastSpoke.toLocaleDateString(
+			undefined,
+			dateOptions
+		);
+	}
+
+	if (!userData.order) {
+		await db.users.update(userData.id, { order: order });
 	}
 
 	setSelectedUser(userData);
