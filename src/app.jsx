@@ -25,7 +25,7 @@ export default function App() {
 					db={db}
 					users={users}
 					setUsers={setUsers}
-					setUser={setSelectedUser}
+					refresh={refresh(setUsers, setSelectedUser, db)}
 				/>
 				<Form
 					db={db}
