@@ -15,23 +15,12 @@ export default function Form({ db, refresh, order }) {
 		lastSpoke: "",
 		lastSpokeVal: "",
 		notes: "",
-		order: [
-			"name:::::Name",
-			"pseudonyms:::::Other Names",
-			"age:::::Age",
-			"birthDate:::::Birthday",
-			"religion:::::Religion",
-			"nationality:::::Nationality",
-			"heritage:::::Heritage",
-			"firstMetStr:::::First Met",
-			"lastSpokeStr:::::Last Spoke",
-			"notes:::::Notes"
-		]
+		order: order
 	});
 
 	return (
 		<div>
-			<form onSubmit={handleSubmit(db, user, setUser, refresh)}>
+			<form onSubmit={handleSubmit(db, user, setUser, refresh, order)}>
 				<input
 					type="text"
 					placeholder="Name"
@@ -156,7 +145,7 @@ const handleSubmit = (db, user, setUser, refresh) => async (e) => {
 	clearData(setUser);
 };
 
-function clearData(setUser) {
+function clearData(setUser, order) {
 	setUser({
 		name: "",
 		pseudonyms: "",
@@ -171,18 +160,7 @@ function clearData(setUser) {
 		lastSpoke: "",
 		lastSpokeVal: "",
 		notes: "",
-		order: [
-			"name:::::Name",
-			"pseudonyms:::::Other Names",
-			"age:::::Age",
-			"birthDate:::::Birthday",
-			"religion:::::Religion",
-			"nationality:::::Nationality",
-			"heritage:::::Heritage",
-			"firstMetStr:::::First Met",
-			"lastSpokeStr:::::Last Spoke",
-			"notes:::::Notes"
-		]
+		order: order
 	});
 }
 
