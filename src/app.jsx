@@ -86,9 +86,14 @@ const refresh = (setUsers, setSelectedUser, db) => async () => {
 
 const selectUser = (setSelectedUser, db) => (userId) => async (e) => {
 	const userData = await db.users.get({ id: userId });
+	const dateFormat = await getDateFormat(db, userData.id);
 
 	if (userData.birthDay !== "" && userData.birthMonth !== "") {
-		userData["birthDate"] = `${userData.birthDay - userData.birthMonth}`;
+		if (dateFormat === "en_US") {
+			userData.birthDate = `${userData.birthMonth}-${userData.birthDay}`;
+		} else {
+			userData.birthDate = `${userData.birthDay}-${userData.birthMonth}`;
+		}
 	}
 
 	setSelectedUser(userData);
