@@ -6,6 +6,15 @@ import UserInfo from "./userInfo";
 
 export default function App() {
 	const [db] = useState(new Dexie("PeopleIndexUserData"));
+
+	useEffect(() => {
+		db.version(1).stores({
+			users:
+				"++id, name, age, birthDay, birthMonth, pseudonyms, firstMet, lastSpoke",
+			settings: "dateFormat"
+		});
+	}, [db]);
+
 	const [users, setUsers] = useState([]);
 	const [selectedUser, setSelectedUser] = useState({});
 
