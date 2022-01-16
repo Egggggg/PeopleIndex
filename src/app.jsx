@@ -29,8 +29,8 @@ export default function App() {
 	);
 }
 
-function refresh(setUsers, db) {
-	db.users.toArray().then((data) => {
+const refresh = (setUsers, setUser, db) => async () => {
+	const data = await db.users.toArray();
 		const users = data.map((user) => {
 			const now = Date.now();
 			let sinceSpoke = now - user.lastSpoke;
