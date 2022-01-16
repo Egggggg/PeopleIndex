@@ -31,7 +31,7 @@ export default function Form({ db, refresh }) {
 
 	return (
 		<div>
-			<form onSubmit={handleSubmit(db, user)}>
+			<form onSubmit={handleSubmit(db, user, setUser, refresh)}>
 				<input
 					type="text"
 					placeholder="Name"
