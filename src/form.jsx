@@ -36,12 +36,6 @@ export default function Form({ db, refresh }) {
 		]
 	});
 
-	const [users, setUsers] = useState([]);
-
-	useEffect(() => {
-		refresh(setUsers, db);
-	}, [db]);
-
 	return (
 		<div>
 			<form onSubmit={handleSubmit(db, user, refresh, setUser)}>
@@ -149,7 +143,6 @@ const handleChange = (user, setUser) => (e) => {
 
 	if (e.target.type === "number") {
 		value = parseInt(value);
-
 	} else if (e.target.type === "date") {
 		const dateObj = new Date(value);
 
@@ -163,10 +156,10 @@ const handleChange = (user, setUser) => (e) => {
 	setUser({ ...user, ...newData });
 };
 
-const handleSubmit = (db, user, setUsers, setUser) => (e) => {
+const handleSubmit = (db, user, refresh, setUser) => (e) => {
 	e.preventDefault();
 	db.users.add(user);
-	refresh(setUsers, db);
+	refresh();
 	clearData(setUser);
 };
 
@@ -223,36 +216,4 @@ function exportData(db) {
 				await writable.close();
 			}
 		});
-}
-
-function refresh(setUsers, db) {
-	db.users.toArray().then((data) => {
-		const users = data.map((user) => {
-			const now = Date.now();
-			let sinceSpoke = now - user.lastSpoke;
-
-			sinceSpoke = Math.floor(sinceSpoke / (1000 * 3600 * 24));
-
-			let lastSpoke = new Date(user.lastSpoke);
-
-			lastSpoke = `${
-				lastSpoke.getMonth() + 1
-			}-${lastSpoke.getDate()}-${lastSpoke.getFullYear()}`;
-
-			return (
-				<tr key={user.id}>
-					<td id={`name-${user.id}`}>{user.name}</td>
-					<td id={`since-${user.id}`}>{sinceSpoke}</td>
-					<td id={`last-${user.id}`}>{lastSpoke}</td>
-					<td>
-						<button onClick={deleteUser} id={user.id}>
-							Delete
-						</button>
-					</td>
-				</tr>
-			);
-		});
-
-		setUsers(users);
-	});
 }
