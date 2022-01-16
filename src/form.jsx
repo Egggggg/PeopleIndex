@@ -140,11 +140,11 @@ const handleChange = (user, setUser) => (e) => {
 	setUser({ ...user, ...newData });
 };
 
-const handleSubmit = (db, user, setUser, refresh) => async (e) => {
+const handleSubmit = (db, user, setUser, refresh, order) => async (e) => {
 	e.preventDefault();
 	await db.users.add(user);
 	refresh();
-	clearData(setUser);
+	clearData(setUser, order);
 };
 
 function clearData(setUser, order) {
