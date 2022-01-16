@@ -203,10 +203,9 @@ async function getNewFileHandle() {
 	}
 }
 
-function exportData(db) {
-	db.table("users")
-		.toArray()
-		.then(async (data) => {
+async function exportData(db) {
+	const data = await db.table("users").toArray();
+
 			const handle = await getNewFileHandle();
 
 			if (handle) {
@@ -215,5 +214,4 @@ function exportData(db) {
 				await writable.write(JSON.stringify(data, null, 2));
 				await writable.close();
 			}
-		});
 }
