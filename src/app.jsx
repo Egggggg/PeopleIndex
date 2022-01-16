@@ -38,7 +38,7 @@ export default function App() {
 	);
 }
 
-const refresh = (setUsers, setUser, db) => async () => {
+const refresh = (setUsers, setSelectedUser, db) => async () => {
 	const data = await db.users.toArray();
 		const users = data.map((user) => {
 			const now = Date.now();
@@ -55,7 +55,7 @@ const refresh = (setUsers, setUser, db) => async () => {
 			return (
 				<tr key={user.id}>
 				<td id={`name-${user.id}`}>
-					<button onClick={selectUser(setUser, db)} userId={user.id}>
+					<button onClick={selectUser(setSelectedUser, db, user.id)}>
 						{user.name}
 					</button>
 				</td>
