@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export default function Form({ db, refresh }) {
+export default function Form({ db }) {
 	useEffect(() => {
 		db.version(1).stores({
 			users:
@@ -38,7 +38,7 @@ export default function Form({ db, refresh }) {
 
 	return (
 		<div>
-			<form onSubmit={handleSubmit(db, user, refresh, setUser)}>
+			<form onSubmit={handleSubmit(db, user)}>
 				<input
 					type="text"
 					placeholder="Name"
