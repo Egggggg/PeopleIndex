@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Form({ db, refresh }) {
+export default function Form({ db, refresh, order }) {
 	const [user, setUser] = useState({
 		name: "",
 		pseudonyms: "",

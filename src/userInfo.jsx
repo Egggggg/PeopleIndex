@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function UserInfo({ user }) {
+export default function UserInfo({ user, db, order }) {
 	if (Object.keys(user).length === 0) {
 		return <div></div>;
 	}

@@ -36,8 +36,9 @@ export default function App({ db }) {
 				db={db}
 				refresh={refresh(setUsers, setSelectedUser, db)}
 				setSelectedUser={selectUser(setSelectedUser, db)}
+				order={order}
 			/>
-			<UserInfo user={selectedUser} />
+			<UserInfo user={selectedUser} db={db} order={order} />
 		</div>
 	);
 }
