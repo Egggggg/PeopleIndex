@@ -45,6 +45,17 @@ async function main() {
 		defaults: "id, dateFormat"
 	});
 
+	const data = await db.defaults.get({ id: 0 });
+
+	if (!data) {
+		await db.defaults.put({ id: 0, dateFormat: "en_US" });
+		console.log("!data");
+	} else {
+		if (!data.dateFormat) {
+			await db.defaults.put({ ...data, id: 0, dateFormat: "en_US" });
+			console.log("!data.dateFormat");
+		}
+	}
 
 	ReactDOM.render(
 		<React.StrictMode>
