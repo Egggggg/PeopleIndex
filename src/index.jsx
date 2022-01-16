@@ -13,6 +13,14 @@ db.version(2).stores({
 	defaults: "dateFormat"
 });
 
-ReactDOM.render(<App db={db} />, document.getElementById("root"));
+
+	ReactDOM.render(
+		<React.StrictMode>
+			<ErrorBoundary>
+				<App db={db} />
+			</ErrorBoundary>
+		</React.StrictMode>,
+		document.getElementById("root")
+	);
 
 serviceWorker.register();

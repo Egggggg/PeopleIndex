@@ -8,22 +8,18 @@ export default function App({ db }) {
 	const [selectedUser, setSelectedUser] = useState({});
 
 	return (
-		<React.StrictMode>
-			<div>
-				<UserList
-					db={db}
-					users={users}
-					setUsers={setUsers}
-					refresh={refresh(setUsers, setSelectedUser, db)}
-				/>
-				<Form
-					db={db}
-					refresh={refresh(setUsers, setSelectedUser, db)}
-					setSelectedUser={setSelectedUser}
-				/>
-				<UserInfo user={selectedUser} />
-			</div>
-		</React.StrictMode>
+		<div>
+			<UserList
+				users={users}
+				refresh={refresh(setUsers, setSelectedUser, db)}
+			/>
+			<Form
+				db={db}
+				refresh={refresh(setUsers, setSelectedUser, db)}
+				setSelectedUser={selectUser(setSelectedUser, db)}
+			/>
+			<UserInfo user={selectedUser} />
+		</div>
 	);
 }
 
