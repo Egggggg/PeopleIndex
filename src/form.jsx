@@ -11,9 +11,9 @@ export default function Form({ db, refresh }) {
 		nationality: "",
 		heritage: "",
 		firstMet: "",
-		firstMetStr: "",
+		firstMetVal: "",
 		lastSpoke: "",
-		lastSpokeStr: "",
+		lastSpokeVal: "",
 		notes: "",
 		order: [
 			"name:::::Name",
@@ -104,7 +104,7 @@ export default function Form({ db, refresh }) {
 					type="date"
 					name="firstMet"
 					onChange={handleChange(user, setUser)}
-					value={user.firstMetStr}
+					value={user.firstMetVal}
 				/>
 				<br />
 				<label htmlFor="lastSpoke">Last Spoke: </label>
@@ -112,7 +112,7 @@ export default function Form({ db, refresh }) {
 					type="date"
 					name="lastSpoke"
 					onInput={handleChange(user, setUser)}
-					value={user.lastSpokeStr}
+					value={user.lastSpokeVal}
 				/>
 				<br />
 				<textarea
@@ -139,7 +139,7 @@ const handleChange = (user, setUser) => (e) => {
 	} else if (e.target.type === "date") {
 		const dateObj = new Date(value);
 
-		newData[`${field}Str`] = value;
+		newData[`${field}Val`] = value;
 
 		value = dateObj.getTime();
 	}
@@ -167,9 +167,9 @@ function clearData(setUser) {
 		nationality: "",
 		heritage: "",
 		firstMet: "",
-		firstMetStr: "",
+		firstMetVal: "",
 		lastSpoke: "",
-		lastSpokeStr: "",
+		lastSpokeVal: "",
 		notes: ""
 	});
 }
