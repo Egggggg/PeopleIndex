@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 const dateOptions = {
 	timeZone: "UTC",
 	month: "numeric",
@@ -32,19 +33,15 @@ export function refresh(setUsers, db) {
 
 			lastSpoke = lastSpoke.toLocaleDateString(undefined, dateOptions);
 
-			return (
-				<tr key={user.id}>
-					<td id={`name-${user.id}`}>
-						<a href={`/${user.id}`}>{user.name}</a>
-					</td>
-					<td id={`since-${user.id}`}>{sinceSpoke}</td>
-					<td id={`last-${user.id}`}>{lastSpoke}</td>
-					<td id={`delete-${user.id}`}>
-						<button onClick={deleteUser(setUsers, db, user.id)}>Delete</button>
-					</td>
-				</tr>
-			);
-		});
+		return createPortal(
+			<NavLink key={user.id} to={`/${user.id}`} className={classes.link}>
+				<div className={classes.div}>
+					<strong>{user.name}</strong>
+					<small>{`${lastSpoke} - ${sinceSpoke}d`}</small>
+				</div>
+			</NavLink>,
+			document.getElementById("side")
+		);
 
 		Promise.all(promises).then((users) => {
 			setUsers(users);
