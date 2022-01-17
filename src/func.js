@@ -59,45 +59,37 @@ function deleteUser(setUsers, db, userid) {
 	};
 }
 
-		if (userData.birthMonth && userData.birthDay) {
-			const birthDate = new Date(`${userData.birthMonth}-${userData.birthDay}`);
+export async function selectUser(db, userId, setUser) {
+	const userData = await db.users.get({ id: userId });
 
-			userData.birthDate = birthDate.toLocaleDateString(undefined, {
-				timeZone: "UTC",
-				month: "numeric",
-				day: "numeric"
-			});
-		}
+	if (userData.birthMonth && userData.birthDay) {
+		const birthDate = new Date(`${userData.birthMonth}-${userData.birthDay}`);
 
-		if (userData.firstMet) {
-			const firstMet = new Date(userData.firstMet);
+		userData.birthDate = birthDate.toLocaleDateString(undefined, {
+			timeZone: "UTC",
+			month: "numeric",
+			day: "numeric"
+		});
+	}
 
-			userData.firstMetStr = firstMet.toLocaleDateString(
-				undefined,
-				dateOptions
-			);
-		}
+	if (userData.firstMet) {
+		const firstMet = new Date(userData.firstMet);
 
-		if (userData.lastSpoke) {
-			const lastSpoke = new Date(userData.lastSpoke);
+		userData.firstMetStr = firstMet.toLocaleDateString(undefined, dateOptions);
+	}
 
-			userData.lastSpokeStr = lastSpoke.toLocaleDateString(
-				undefined,
-				dateOptions
-			);
-		}
+	if (userData.lastSpoke) {
+		const lastSpoke = new Date(userData.lastSpoke);
 
-		if (!userData.order) {
-			await db.users.update(userData.id, { order: order });
-		}
+		userData.lastSpokeStr = lastSpoke.toLocaleDateString(
+			undefined,
+			dateOptions
+		);
+	}
 
-		setSelectedUser(userData);
-	};
-}
+	if (!userData.order) {
+		await db.users.update(userData.id, { order: order });
+	}
 
-function deleteUser(setUsers, db, userid) {
-	return async (e) => {
-		await db.users.delete(parseInt(userid));
-		refresh(setUsers, db);
-	};
+	return userData;
 }
