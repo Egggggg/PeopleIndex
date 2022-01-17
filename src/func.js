@@ -17,6 +17,8 @@ const order = [
 	"lastSpokeStr:::::Last Spoke",
 	"notes:::::Notes"
 ];
+
+export function refresh(setUsers, db) {
 	return async () => {
 		const now = Date.now();
 		const data = await db.users.toArray();
@@ -33,9 +35,7 @@ const order = [
 			return (
 				<tr key={user.id}>
 					<td id={`name-${user.id}`}>
-						<button onClick={selectUser(setSelectedUser, db)(user.id)}>
-							{user.name}
-						</button>
+						<a href={`/${user.id}`}>{user.name}</a>
 					</td>
 					<td id={`since-${user.id}`}>{sinceSpoke}</td>
 					<td id={`last-${user.id}`}>{lastSpoke}</td>
