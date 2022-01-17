@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Form({ db, refresh, order }) {
+export default function Form({ db, setUsers, getUserList, order }) {
 	const [user, setUser] = useState({
 		name: "",
 		pseudonyms: "",
@@ -20,7 +20,9 @@ export default function Form({ db, refresh, order }) {
 
 	return (
 		<div>
-			<form onSubmit={handleSubmit(db, user, setUser, refresh, order)}>
+			<form
+				onSubmit={handleSubmit(db, user, setUser, setUsers, getUserList, order)}
+			>
 				<input
 					type="text"
 					placeholder="Name"
