@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./app";
 import UserInfo from "./userInfo";
 import Dexie from "dexie";
@@ -46,19 +45,7 @@ db.version(1).stores({
 ReactDOM.render(
 	<React.StrictMode>
 		<ErrorBoundary>
-			<BrowserRouter>
-				<Routes>
-					<Route path="/" element={<App db={db} />}>
-						<Route index>
-							<div class="text-center mt-3">
-								<h1>People Index</h1>
-								<h3>Know your people.</h3>
-							</div>
-						</Route>
-						<Route path=":id" element={<UserInfo />}></Route>
-					</Route>
-				</Routes>
-			</BrowserRouter>
+			<App db={db} />
 		</ErrorBoundary>
 	</React.StrictMode>,
 	document.getElementById("root")

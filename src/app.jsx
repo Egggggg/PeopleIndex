@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import Form from "./form";
-import UserList from "./userList";
+import { useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import UserInfo from "./userInfo";
-import { refresh } from "./func";
+import UserList from "./userList";
+import Form from "./form";
 
 const order = [
 	"name:::::Name",
@@ -21,10 +21,26 @@ export default function App({ db }) {
 	const [users, setUsers] = useState([]);
 
 	return (
-		<div>
-			<UserList users={users} refresh={refresh(setUsers, db)} />
-			<Form db={db} refresh={refresh(setUsers, db)} order={order} />
-			<UserInfo db={db} />
-		</div>
+		<BrowserRouter>
+			<UserList db={db} users={users} setUsers={setUsers} />
+			<Routes>
+				<Route
+					index
+					element={
+						<div className="text-center mt-3">
+							<h1>People Index</h1>
+							<h3>Know your people.</h3>
+						</div>
+					}
+				></Route>
+				<Route
+					path="add"
+					element={
+						<Form db={db} users={users} setusers={setUsers} order={order} />
+					}
+				></Route>
+				<Route path=":id" element={<UserInfo order={order} />}></Route>
+			</Routes>
+		</BrowserRouter>
 	);
 }
