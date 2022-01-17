@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { selectUser } from "./func";
 
-export default function UserInfo() {
+export default function UserInfo({ db, order }) {
 	const [user, setUser] = useState({});
 	const userId = useParams().id;
 

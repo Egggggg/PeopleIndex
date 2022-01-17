@@ -39,7 +39,7 @@ export default function App({ db }) {
 						<Form db={db} users={users} setusers={setUsers} order={order} />
 					}
 				></Route>
-				<Route path=":id" element={<UserInfo order={order} />}></Route>
+				<Route path=":id" element={<UserInfo order={order} db={db} />}></Route>
 			</Routes>
 		</BrowserRouter>
 	);
