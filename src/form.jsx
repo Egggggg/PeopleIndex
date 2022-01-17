@@ -115,7 +115,7 @@ export default function Form({ db, setUsers, getUserList, order }) {
 				<br />
 				<input type="submit" value="Submit" />
 			</form>
-			<button onClick={exportData}>Export</button>
+			<button onClick={exportData(db)}>Export</button>
 		</div>
 	);
 }
@@ -191,8 +191,11 @@ async function getNewFileHandle() {
 	}
 }
 
-async function exportData(db) {
-	const data = await db.table("users").toArray();
+const exportData = (db) => async (e) => {
+	console.log(db);
+	console.log(db.users);
+
+	const data = await db.users.toArray();
 
 	const handle = await getNewFileHandle();
 
@@ -202,4 +205,4 @@ async function exportData(db) {
 		await writable.write(JSON.stringify(data, null, 2));
 		await writable.close();
 	}
-}
+};
