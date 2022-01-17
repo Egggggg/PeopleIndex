@@ -51,9 +51,13 @@ export function refresh(setUsers, db) {
 		});
 	};
 }
-export function selectUser(setSelectedUser, db, order) {
-	return (userId) => async (e) => {
-		const userData = await db.users.get({ id: userId });
+
+function deleteUser(setUsers, db, userid) {
+	return async (e) => {
+		await db.users.delete(parseInt(userid));
+		refresh(setUsers, db);
+	};
+}
 
 		if (userData.birthMonth && userData.birthDay) {
 			const birthDate = new Date(`${userData.birthMonth}-${userData.birthDay}`);
