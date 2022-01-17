@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useState, useParams, useEffect } from "react";
+import { selectUser } from "./func";
 
-export default function UserInfo({ user, db, order }) {
+export default function UserInfo() {
+	const [user, setUser] = useState({});
+	const userId = useParams().id;
+
+	useEffect(() => {
+		async function setUserAsync() {
+			setUser(await selectUser(userId));
+		}
+
+		setUserAsync();
+	}, [userId]);
+
 	if (Object.keys(user).length === 0) {
 		return <div></div>;
 	}
