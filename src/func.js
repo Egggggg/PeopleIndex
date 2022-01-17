@@ -5,7 +5,18 @@ const dateOptions = {
 	year: "numeric"
 };
 
-export function refresh(setUsers, setSelectedUser, db) {
+const order = [
+	"name:::::Name",
+	"pseudonyms:::::Other Names",
+	"age:::::Age",
+	"birthDate:::::Birthday",
+	"religion:::::Religion",
+	"nationality:::::Nationality",
+	"heritage:::::Heritage",
+	"firstMetStr:::::First Met",
+	"lastSpokeStr:::::Last Spoke",
+	"notes:::::Notes"
+];
 	return async () => {
 		const now = Date.now();
 		const data = await db.users.toArray();
