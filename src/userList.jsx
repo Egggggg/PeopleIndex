@@ -1,13 +1,18 @@
 import React, { useEffect } from "react";
+import { getUserList } from "./func";
 
-export default function UserList(props) {
+export default function UserList({ db, users, setUsers }) {
 	useEffect(() => {
-		props.refresh();
-	}, [props]);
+		async function getUserListProxy() {
+			setUsers(await getUserList(db));
+		}
 
-	return (
-		<table>
-			<tbody>{props.users}</tbody>
-		</table>
-	);
+		getUserListProxy();
+	}, [db, setUsers, users]);
+
+	if (!users || users.length === 0) {
+		return <div></div>;
+	}
+
+	return users;
 }
