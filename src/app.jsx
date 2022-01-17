@@ -26,6 +26,15 @@ export default function App({ db }) {
 	const [users, setUsers] = useState([]);
 	const [selectedUser, setSelectedUser] = useState({});
 
+	if (Object.keys(selectedUser).length === 0) {
+		return (
+			<div class="text-center mt-3">
+				<h1>People Index</h1>
+				<h3>Know your people.</h3>
+			</div>
+		);
+	}
+
 	return (
 		<div>
 			<UserList
