@@ -19,19 +19,18 @@ const order = [
 	"notes:::::Notes"
 ];
 
-export function refresh(setUsers, db) {
-	return async () => {
-		const now = Date.now();
-		const data = await db.users.toArray();
+export async function getUserList(db) {
+	const now = Date.now();
+	const data = await db.users.toArray();
 
-		const promises = data.map(async (user) => {
-			let sinceSpoke = now - user.lastSpoke;
+	const users = data.map((user) => {
+		let sinceSpoke = now - user.lastSpoke;
 
-			sinceSpoke = Math.floor(sinceSpoke / (1000 * 3600 * 24));
+		sinceSpoke = Math.floor(sinceSpoke / (1000 * 3600 * 24));
 
-			let lastSpoke = new Date(user.lastSpoke);
+		let lastSpoke = new Date(user.lastSpoke);
 
-			lastSpoke = lastSpoke.toLocaleDateString(undefined, dateOptions);
+		lastSpoke = lastSpoke.toLocaleDateString(undefined, dateOptions);
 
 		return createPortal(
 			<NavLink key={user.id} to={`/${user.id}`} className={classes.link}>
@@ -42,11 +41,9 @@ export function refresh(setUsers, db) {
 			</NavLink>,
 			document.getElementById("side")
 		);
+	});
 
-		Promise.all(promises).then((users) => {
-			setUsers(users);
-		});
-	};
+	return users;
 }
 
 function deleteUser(setUsers, db, userid) {
