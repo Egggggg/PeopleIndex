@@ -8,11 +8,11 @@ export default function UserInfo({ db, order }) {
 
 	useEffect(() => {
 		async function setUserAsync() {
-			setUser(await selectUser(userId));
+			setUser(await selectUser(db, userId, order));
 		}
 
 		setUserAsync();
-	}, [userId]);
+	}, [userId, db, order]);
 
 	if (Object.keys(user).length === 0) {
 		return <div></div>;
