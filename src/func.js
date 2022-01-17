@@ -47,8 +47,8 @@ function deleteUser(setUsers, db, userid) {
 	};
 }
 
-export async function selectUser(db, userId, setUser, order) {
-	const userData = await db.users.get({ id: userId });
+export async function selectUser(db, userId, order) {
+	const userData = await db.users.get(parseInt(userId));
 
 	if (userData.birthMonth && userData.birthDay) {
 		const birthDate = new Date(`${userData.birthMonth}-${userData.birthDay}`);
