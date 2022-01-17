@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { selectUser } from "./func";
+import { NavLink, useParams } from "react-router-dom";
+import { selectUser, editField } from "./func";
 
 export default function UserInfo({ db, order }) {
 	const [user, setUser] = useState({});
@@ -28,10 +28,16 @@ export default function UserInfo({ db, order }) {
 				<div key={slug}>
 					<h3>{fieldDisplay}</h3>
 					<p>{user[slug]}</p>
+					<hr />
 				</div>
 			);
 		}
 	});
 
-	return fields;
+	return (
+		<div>
+			{fields}
+			<NavLink to={`edit/${userId}`}>Edit</NavLink>
+		</div>
+	);
 }

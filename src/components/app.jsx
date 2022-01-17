@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import UserInfo from "./userInfo";
-import UserList from "./userList";
+import UserList from "../userList";
+import UserEditor from "./userEditor";
 import Form from "./form";
 
 const order = [
@@ -39,6 +40,7 @@ export default function App({ db }) {
 						<Form db={db} users={users} setusers={setUsers} order={order} />
 					}
 				></Route>
+				<Route path="edit/:id" element={<UserEditor db={db} />}></Route>
 				<Route path=":id" element={<UserInfo order={order} db={db} />}></Route>
 			</Routes>
 		</BrowserRouter>
