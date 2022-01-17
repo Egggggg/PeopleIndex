@@ -8,18 +8,10 @@ const dateOptions = {
 	year: "numeric"
 };
 
-const order = [
-	"name:::::Name",
-	"pseudonyms:::::Other Names",
-	"age:::::Age",
-	"birthDate:::::Birthday",
-	"religion:::::Religion",
-	"nationality:::::Nationality",
-	"heritage:::::Heritage",
-	"firstMetStr:::::First Met",
-	"lastSpokeStr:::::Last Spoke",
-	"notes:::::Notes"
-];
+const classes = {
+	link: "list-group-item list-group-item-action py-3 lh-tight",
+	div: "d-flex w-100 align-items-center justify-content-between"
+};
 
 export async function getUserList(db) {
 	const now = Date.now();
