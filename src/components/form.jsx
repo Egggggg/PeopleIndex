@@ -136,20 +136,5 @@ const handleSubmit =
 	};
 
 function clearData(setUser, order) {
-	setUser({
-		name: "",
-		pseudonyms: "",
-		age: "",
-		birthDay: "",
-		birthMonth: "",
-		religion: "",
-		nationality: "",
-		heritage: "",
-		firstMet: "",
-		firstMetVal: "",
-		lastSpoke: "",
-		lastSpokeVal: "",
-		notes: "",
-		order: order
-	});
+	setUser(getDefaultFields(order));
 }
