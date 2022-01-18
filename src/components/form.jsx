@@ -11,35 +11,38 @@ export default function Form({ db, setusers, order }) {
 	);
 }
 
-const handleChange = (user, setUser) => (e) => {
-	const newData = {};
-	const field = e.target.name;
-	let value = e.target.value;
+function handleChange(user, setUser) {
+	return (e) => {
+		const newData = {};
+		const field = e.target.name;
+		let value = e.target.value;
 
-	if (value !== "") {
-		if (e.target.type === "number") {
-			value = parseInt(value);
-		} else if (e.target.type === "date") {
-			const dateObj = new Date(value);
+		if (value !== "") {
+			if (e.target.type === "number") {
+				value = parseInt(value);
+			} else if (e.target.type === "date") {
+				const dateObj = new Date(value);
 
-			newData[`${field}Val`] = value;
+				newData[`${field}Val`] = value;
 
-			value = dateObj.getTime();
+				value = dateObj.getTime();
+			}
 		}
-	}
 
-	newData[field] = value;
+		newData[field] = value;
 
-	setUser({ ...user, ...newData });
-};
+		setUser({ ...user, ...newData });
+	};
+}
 
-const handleSubmit =
-	(db, user, setUser, setUsers, getUserList, order) => async (e) => {
+function handleSubmit(db, user, setUser, setUsers, getUserList, order) {
+	return async (e) => {
 		e.preventDefault();
 		await db.users.add(user);
 		setUsers(getUserList(db));
 		clearData(setUser, order);
 	};
+}
 
 function clearData(setUser, order) {
 	setUser(getDefaultFields(order));
