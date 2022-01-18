@@ -135,5 +135,117 @@ export function exportData(db) {
 		}
 	};
 }
+
+export function getDefaultForm(
+	handleSubmit,
+	handleChange,
+	user,
+	children = null
+) {
+	return (
+		<div>
+			<form onSubmit={handleSubmit}>
+				<h3>Name</h3>
+				<input
+					type="text"
+					placeholder="Name"
+					name="name"
+					onChange={handleChange}
+					value={user.name}
+				/>
+				<hr />
+				<h3>Other Names</h3>
+				<input
+					type="text"
+					placeholder="Other Names"
+					name="pseudonyms"
+					onChange={handleChange}
+					value={user.pseudonyms}
+				/>
+				<hr />
+				<h3>Age</h3>
+				<input
+					type="number"
+					placeholder="Age"
+					name="age"
+					onChange={handleChange}
+					value={user.age}
+				/>
+				<hr />
+				<h3>Birth Day and Month</h3>
+				<input
+					type="number"
+					placeholder="Birth Day"
+					name="birthDay"
+					onChange={handleChange}
+					max="31"
+					min="1"
+					value={user.birthDay}
+				/>
+				<input
+					type="number"
+					placeholder="Birth Month"
+					name="birthMonth"
+					onChange={handleChange}
+					max="12"
+					min="1"
+					value={user.birthMonth}
+				/>
+				<hr />
+				<h3>Religion</h3>
+				<input
+					type="text"
+					placeholder="Religion"
+					name="religion"
+					onChange={handleChange}
+					value={user.religion}
+				/>
+				<hr />
+				<h3>Nationality</h3>
+				<input
+					type="text"
+					placeholder="Nationality"
+					name="nationality"
+					onChange={handleChange}
+					value={user.nationality}
+				/>
+				<hr />
+				<h3>Heritage</h3>
+				<input
+					type="text"
+					placeholder="Heritage"
+					name="heritage"
+					onChange={handleChange}
+					value={user.heritage}
+				/>
+				<hr />
+				<h3>First Met</h3>
+				<input
+					type="date"
+					name="firstMet"
+					onChange={handleChange}
+					value={user.firstMetVal}
+				/>
+				<hr />
+				<h3>Last Spoke</h3>
+				<input
+					type="date"
+					name="lastSpoke"
+					onInput={handleChange}
+					value={user.lastSpokeVal}
+				/>
+				<hr />
+				<h3>Notes</h3>
+				<textarea
+					placeholder="Notes"
+					name="notes"
+					onChange={handleChange}
+					value={user.notes}
+				/>
+				<br />
+				{children}
+				<input type="submit" value="Submit" />
+			</form>
+		</div>
 	);
-};
+}
