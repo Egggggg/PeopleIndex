@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import UserInfo from "./userInfo";
-import UserList from "../userList";
+import UserList from "./userList";
 import UserEditor from "./userEditor";
 import Form from "./form";
 
