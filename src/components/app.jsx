@@ -4,6 +4,7 @@ import UserInfo from "./userInfo";
 import UserList from "./userList";
 import UserEditor from "./userEditor";
 import Form from "./form";
+import Navbar from "./navbar";
 
 const order = [
 	{
@@ -57,6 +58,7 @@ export default function App({ db }) {
 
 	return (
 		<BrowserRouter>
+			<Navbar />
 			<UserList db={db} users={users} setUsers={setUsers} />
 			<Routes>
 				<Route
