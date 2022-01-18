@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { getDefaultFields, getDefaultForm, getUserList } from "../func";
 
-export default function Form({ db, setUsers, order }) {
+export default function Form({ db, setusers, order }) {
 	const [user, setUser] = useState(getDefaultFields(order));
 
 	return getDefaultForm(
-		handleSubmit(db, user, setUser, setUsers, getUserList, order),
+		handleSubmit(db, user, setUser, setusers, getUserList, order),
 		handleChange(user, setUser),
 		user
 	);
