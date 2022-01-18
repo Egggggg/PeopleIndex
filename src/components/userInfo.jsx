@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useParams } from "react-router-dom";
-import { selectUser } from "./func";
+import { selectUser } from "../func";
 
 export default function UserInfo({ db, order }) {
 	const [user, setUser] = useState({});
