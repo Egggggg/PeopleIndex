@@ -101,7 +101,6 @@ export default function Form({ db, setUsers, order }) {
 				<br />
 				<input type="submit" value="Submit" />
 			</form>
-			<button onClick={exportData(db)}>Export</button>
 		</div>
 	);
 }
