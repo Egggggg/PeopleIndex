@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { getUserList } from "./func";
+import { createPortal } from "react-dom";
+import { getUserList } from "../func";
 
 export default function UserList({ db, users, setUsers }) {
 	useEffect(() => {
@@ -14,5 +15,5 @@ export default function UserList({ db, users, setUsers }) {
 		return <div></div>;
 	}
 
-	return users;
+	return createPortal(users, document.getElementById("side"));
 }

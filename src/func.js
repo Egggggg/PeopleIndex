@@ -26,14 +26,13 @@ export async function getUserList(db) {
 
 		lastSpoke = lastSpoke.toLocaleDateString(undefined, dateOptions);
 
-		return createPortal(
+		return (
 			<NavLink key={user.id} to={`/${user.id}`} className={classes.link}>
 				<div className={classes.div}>
 					<strong>{user.name}</strong>
-					<small>{`${lastSpoke} - ${sinceSpoke}d`}</small>
+					<small>{`${lastSpoke} - ${sinceSpoke}d ago`}</small>
 				</div>
-			</NavLink>,
-			document.getElementById("side")
+			</NavLink>
 		);
 	});
 
