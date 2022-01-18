@@ -1,23 +1,7 @@
 import React, { useState } from "react";
 import { getDefaultFields, getUserList } from "../func";
 
-export default function Form({ db, setUsers, getUserList, order }) {
-	const [user, setUser] = useState({
-		name: "",
-		pseudonyms: "",
-		age: "",
-		birthDay: "",
-		birthMonth: "",
-		religion: "",
-		nationality: "",
-		heritage: "",
-		firstMet: "",
-		firstMetVal: "",
-		lastSpoke: "",
-		lastSpokeVal: "",
-		notes: "",
-		order: order
-	});
+export default function Form({ db, setUsers, order }) {
 
 	return (
 		<div>
