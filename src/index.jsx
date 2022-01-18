@@ -41,6 +41,18 @@ db.version(1).stores({
 		"++id, name, age, birthDay, birthMonth, pseudonyms, firstMet, lastSpoke"
 });
 
+db.version(2).stores({
+	users:
+		"++id, name, pronouns, age, birthDay, birthMonth, pseudonyms, firstMet, lastSpoke"
+});
+
+db.version(2).upgrade((trans) => {
+	return trans.users.toCollection().modify((user) => {
+		user.pronouns = "";
+		user.order.splice(1, 0, "pronouns:::::Pronouns");
+	});
+});
+
 ReactDOM.render(
 	<React.StrictMode>
 		<ErrorBoundary>
