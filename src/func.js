@@ -42,7 +42,6 @@ export async function getUserList(db) {
 function deleteUser(setUsers, db, userid) {
 	return async (e) => {
 		await db.users.delete(parseInt(userid));
-		refresh(setUsers, db);
 	};
 }
 
@@ -100,3 +99,37 @@ export function getDefaultFields(order) {
 	};
 }
 
+async function getNewFileHandle() {
+	const options = {
+		suggestedName: "users.json",
+		startIn: "downloads",
+		types: [
+			{
+				description: "JSON Files",
+				accept: {
+					"text/plain": [".json"]
+				}
+			}
+		]
+	};
+
+	try {
+		const handle = await window.showSaveFilePicker(options);
+		return handle;
+	} catch {
+		return null;
+	}
+}
+
+export const exportData = (db) => async (e) => {
+	const data = await db.users.toArray();
+
+	const handle = await getNewFileHandle();
+
+	if (handle) {
+		const writable = await handle.createWritable();
+
+		await writable.write(JSON.stringify(data, null, 2));
+		await writable.close();
+	}
+};
