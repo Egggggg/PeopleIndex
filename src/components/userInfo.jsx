@@ -14,8 +14,8 @@ export default function UserInfo({ db, order }) {
 		setUserAsync();
 	}, [userId, db, order]);
 
-	if (Object.keys(user).length === 0) {
-		return <div></div>;
+	if (!user || Object.keys(user).length === 0) {
+		return <h3 className="text-center">User not found</h3>;
 	}
 
 	const fields = user.order.map((field) => {
