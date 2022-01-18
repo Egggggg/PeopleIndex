@@ -242,7 +242,7 @@ export function getDefaultForm(
 					onChange={handleChange}
 					value={user.notes}
 				/>
-				<br />
+				<hr />
 				{children}
 				<input type="submit" value="Submit" />
 			</form>
