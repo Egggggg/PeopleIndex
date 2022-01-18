@@ -7,6 +7,7 @@ import Form from "./form";
 
 const order = [
 	"name:::::Name",
+	"pronouns:::::Pronouns",
 	"pseudonyms:::::Other Names",
 	"age:::::Age",
 	"birthDate:::::Birthday",
