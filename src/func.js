@@ -80,3 +80,23 @@ export async function selectUser(db, userId, order) {
 
 	return userData;
 }
+
+export function getDefaultFields(order) {
+	return {
+		name: "",
+		pseudonyms: "",
+		age: "",
+		birthDay: "",
+		birthMonth: "",
+		religion: "",
+		nationality: "",
+		heritage: "",
+		firstMet: "",
+		firstMetVal: "",
+		lastSpoke: "",
+		lastSpokeVal: "",
+		notes: "",
+		order: order
+	};
+}
+
