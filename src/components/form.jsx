@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { getDefaultFields, getUserList } from "../func";
+import { useState } from "react";
 
 export default function Form({ db, setUsers, order }) {
 	const [user, setUser] = useState(getDefaultFields(order));
