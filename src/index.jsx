@@ -49,7 +49,7 @@ db.version(2).stores({
 db.version(2).upgrade((trans) => {
 	return trans.users.toCollection().modify((user) => {
 		user.pronouns = "";
-		user.order.splice(1, 0, "pronouns:::::Pronouns");
+		user.order.splice(1, 0, { slug: "pronouns", display: "Pronouns" });
 	});
 });
 

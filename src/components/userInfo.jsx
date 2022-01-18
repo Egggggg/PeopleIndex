@@ -19,14 +19,14 @@ export default function UserInfo({ db, order }) {
 	}
 
 	const fields = user.order.map((field) => {
-		const [slug, fieldDisplay] = field.split(":::::");
+		const { slug, display } = field;
 
 		if (!user[slug]) {
 			return <div key={slug}></div>;
 		} else {
 			return (
 				<div key={slug}>
-					<h3>{fieldDisplay}</h3>
+					<h3>{display}</h3>
 					<p>{user[slug]}</p>
 					<hr />
 				</div>

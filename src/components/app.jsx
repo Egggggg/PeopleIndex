@@ -6,17 +6,50 @@ import UserEditor from "./userEditor";
 import Form from "./form";
 
 const order = [
-	"name:::::Name",
-	"pronouns:::::Pronouns",
-	"pseudonyms:::::Other Names",
-	"age:::::Age",
-	"birthDate:::::Birthday",
-	"religion:::::Religion",
-	"nationality:::::Nationality",
-	"heritage:::::Heritage",
-	"firstMetStr:::::First Met",
-	"lastSpokeStr:::::Last Spoke",
-	"notes:::::Notes"
+	{
+		slug: "name",
+		display: "Name"
+	},
+	{
+		slug: "pronouns",
+		display: "Pronouns"
+	},
+	{
+		slug: "pseudonyms",
+		display: "Other Names"
+	},
+	{
+		slug: "age",
+		display: "Age"
+	},
+	{
+		slug: "birthDate",
+		display: "Birthday"
+	},
+	{
+		slug: "religion",
+		display: "Religion"
+	},
+	{
+		slug: "nationality",
+		display: "Nationality"
+	},
+	{
+		slug: "heritage",
+		display: "Heritage"
+	},
+	{
+		slug: "firstMetStr",
+		display: "First Met"
+	},
+	{
+		slug: "lastSpokeStr",
+		display: "Last Spoke"
+	},
+	{
+		slug: "notes",
+		display: "Notes"
+	}
 ];
 
 export default function App({ db }) {
