@@ -299,7 +299,7 @@ export function getDefaultForm(handleSubmit, handleChange, user) {
 					value={user.notes}
 				/>
 				<hr />
-				<input type="submit" value="Submit" />
+				<input type="submit" className="btn btn-primary" value="Submit" />
 				<div style={{ height: "50px" }}></div>
 			</form>
 		</div>

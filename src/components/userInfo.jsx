@@ -37,7 +37,9 @@ export default function UserInfo({ db, order }) {
 	return (
 		<div>
 			{fields}
-			<NavLink to={`/edit/${userId}`}>Edit</NavLink>
+			<NavLink to={`/edit/${userId}`} className="btn btn-primary">
+				Edit
+			</NavLink>
 		</div>
 	);
 }
