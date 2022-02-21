@@ -249,3 +249,40 @@ export function getDefaultForm(
 		</div>
 	);
 }
+
+export function handleChange(user, setUser) {
+	return (e) => {
+		const newData = {};
+		const field = e.target.name;
+		let value = e.target.value;
+
+		if (value !== "") {
+			if (e.target.type === "number") {
+				value = parseInt(value);
+			} else if (e.target.type === "date") {
+				const dateObj = new Date(value);
+
+				newData[`${field}Val`] = value;
+
+				value = dateObj.getTime();
+			}
+		}
+
+		newData[field] = value;
+
+		setUser({ ...user, ...newData });
+	};
+}
+
+export function handleSubmit(db, user, setUser, setUsers, order) {
+	return async (e) => {
+		e.preventDefault();
+		await db.users.add(user);
+		setUsers(getUserList(db));
+		clearData(setUser, order);
+	};
+}
+
+export function clearData(setUser, order) {
+	setUser(getDefaultFields(order));
+}
