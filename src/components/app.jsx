@@ -76,7 +76,10 @@ export default function App({ db }) {
 						<Form db={db} users={users} setusers={setUsers} order={order} />
 					}
 				></Route>
-				<Route path="edit/:id" element={<UserEditor db={db} />}></Route>
+				<Route
+					path="edit/:id"
+					element={<UserEditor db={db} setusers={setUsers} order={order} />}
+				></Route>
 				<Route path=":id" element={<UserInfo order={order} db={db} />}></Route>
 			</Routes>
 		</HashRouter>
