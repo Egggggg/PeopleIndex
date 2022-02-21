@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import UserInfo from "./userInfo";
 import UserList from "./userList";
 import UserEditor from "./userEditor";
@@ -57,7 +57,7 @@ export default function App({ db }) {
 	const [users, setUsers] = useState([]);
 
 	return (
-		<BrowserRouter>
+		<HashRouter>
 			<Navbar />
 			<UserList db={db} users={users} setUsers={setUsers} />
 			<Routes>
@@ -79,6 +79,6 @@ export default function App({ db }) {
 				<Route path="edit/:id" element={<UserEditor db={db} />}></Route>
 				<Route path=":id" element={<UserInfo order={order} db={db} />}></Route>
 			</Routes>
-		</BrowserRouter>
+		</HashRouter>
 	);
 }
