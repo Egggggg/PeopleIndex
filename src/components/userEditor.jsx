@@ -1,24 +1,38 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { handleSubmit, handleChange, getDefaultForm } from "../func";
+import {
+	handleUpdate,
+	handleChange,
+	getDefaultForm,
+	getUser,
+	getDefaultFields
+} from "../func";
 
 export default function UserEditor({ db, setusers, order }) {
-	const [user, setUser] = useState();
-	const userId = useParams().userId;
+	const userId = useParams().id;
+	const [user, setUser] = useState(getDefaultFields(order));
+	const [form, setForm] = useState(null);
 
 	useEffect(() => {
-		async function dbGetProxy() {
-			return await db.users.get(parseInt(userId));
-		}
-
-		setUser(dbGetProxy());
+		getUser(db, userId).then((result) => {
+			setUser(result);
+		});
 	}, [db, userId]);
 
-	console.log(user);
+	useEffect(() => {
+		setForm(
+			getDefaultForm(
+				handleUpdate(db, user, setUser, setusers, order, () =>
+					setRedirect(true)
+				),
+				handleChange(user, setUser),
+				user
+			)
+		);
+	}, [db, order, setusers, user]);
 
-	return getDefaultForm(
-		handleSubmit(db, user, setUser, setusers, order),
-		handleChange(user, setUser),
-		user
+	return (
+		<>
+			{form}
+		</>
 	);
 }
