@@ -282,12 +282,15 @@ export function handleChange(user, setUser) {
 	};
 }
 
-export function handleSubmit(db, user, setUser, setUsers, order) {
+export function handleSubmit(db, user, setUser, setUsers, order, redirect) {
 	return async (e) => {
 		e.preventDefault();
 		await db.users.add(user);
-		setUsers(getUserList(db));
+		setUsers(await getUserList(db));
 		clearData(setUser, order);
+		redirect();
+	};
+}
 	};
 }
 
