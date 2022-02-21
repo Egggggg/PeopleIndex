@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useParams, Navigate } from "react-router-dom";
+
 import {
 	handleUpdate,
 	handleChange,
@@ -10,6 +12,7 @@ import {
 export default function UserEditor({ db, setusers, order }) {
 	const userId = useParams().id;
 	const [user, setUser] = useState(getDefaultFields(order));
+	const [redirect, setRedirect] = useState(false);
 	const [form, setForm] = useState(null);
 
 	useEffect(() => {
@@ -32,6 +35,7 @@ export default function UserEditor({ db, setusers, order }) {
 
 	return (
 		<>
+			{redirect && <Navigate to="/" />}
 			{form}
 		</>
 	);
