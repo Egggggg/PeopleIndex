@@ -17,19 +17,27 @@ export async function getUserList(db) {
 	const data = await db.users.toArray();
 
 	const users = data.map((user) => {
-		let sinceSpoke = now - user.lastSpoke;
+		let showLastSpoke = true;
+		let sinceSpoke;
+		let lastSpoke;
 
-		sinceSpoke = Math.floor(sinceSpoke / (1000 * 3600 * 24));
+		if (user.lastSpoke === "" || isNaN(user.lastSpoke)) {
+			showLastSpoke = false;
+		} else {
+			sinceSpoke = now - user.lastSpoke;
+			sinceSpoke = Math.floor(sinceSpoke / (1000 * 3600 * 24));
 
-		let lastSpoke = new Date(user.lastSpoke);
-
-		lastSpoke = lastSpoke.toLocaleDateString(undefined, dateOptions);
+			lastSpoke = new Date(user.lastSpoke);
+			lastSpoke = lastSpoke.toLocaleDateString(undefined, dateOptions);
+		}
 
 		return (
 			<NavLink key={user.id} to={`/${user.id}`} className={classes.link}>
 				<div className={classes.div}>
 					<strong>{user.name}</strong>
-					<small>{`${lastSpoke} - ${sinceSpoke}d ago`}</small>
+					{showLastSpoke && (
+						<small>{`${lastSpoke} - ${sinceSpoke}d ago`}</small>
+					)}
 				</div>
 			</NavLink>
 		);
