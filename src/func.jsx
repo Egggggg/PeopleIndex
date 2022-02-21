@@ -149,7 +149,7 @@ export function getDefaultForm(handleSubmit, handleChange, user) {
 	return (
 		<div>
 			<form onSubmit={handleSubmit}>
-				<label for="name">
+				<label htmlFor="name">
 					<h3>Name</h3>
 				</label>
 				<input
@@ -161,7 +161,7 @@ export function getDefaultForm(handleSubmit, handleChange, user) {
 					value={user.name}
 				/>
 				<hr />
-				<label for="pronouns">
+				<label htmlFor="pronouns">
 					<h3>Pronouns</h3>
 				</label>
 				<input
@@ -173,7 +173,7 @@ export function getDefaultForm(handleSubmit, handleChange, user) {
 					value={user.pronouns}
 				/>
 				<hr />
-				<label for="pseudonyms">
+				<label htmlFor="pseudonyms">
 					<h3>Other Names</h3>
 				</label>
 				<input
@@ -185,7 +185,7 @@ export function getDefaultForm(handleSubmit, handleChange, user) {
 					value={user.pseudonyms}
 				/>
 				<hr />
-				<label for="age">
+				<label htmlFor="age">
 					<h3>Age</h3>
 				</label>
 				<input
@@ -199,7 +199,7 @@ export function getDefaultForm(handleSubmit, handleChange, user) {
 				<hr />
 				<div className="row">
 					<div className="col">
-						<label for="birthDay">
+						<label htmlFor="birthDay">
 							<h3>Birth Day</h3>
 						</label>
 						<input
@@ -214,7 +214,7 @@ export function getDefaultForm(handleSubmit, handleChange, user) {
 						/>
 					</div>
 					<div className="col">
-						<label for="birthMonth">
+						<label htmlFor="birthMonth">
 							<h3>Birth Month</h3>
 						</label>
 						<input
@@ -230,7 +230,7 @@ export function getDefaultForm(handleSubmit, handleChange, user) {
 					</div>
 				</div>
 				<hr />
-				<label for="religion">
+				<label htmlFor="religion">
 					<h3>Religion</h3>
 				</label>
 				<input
@@ -242,7 +242,7 @@ export function getDefaultForm(handleSubmit, handleChange, user) {
 					value={user.religion}
 				/>
 				<hr />
-				<label for="nationality">
+				<label htmlFor="nationality">
 					<h3>Nationality</h3>
 				</label>
 				<input
@@ -254,7 +254,7 @@ export function getDefaultForm(handleSubmit, handleChange, user) {
 					value={user.nationality}
 				/>
 				<hr />
-				<label for="heritage">
+				<label htmlFor="heritage">
 					<h3>Heritage</h3>
 				</label>
 				<input
@@ -266,7 +266,7 @@ export function getDefaultForm(handleSubmit, handleChange, user) {
 					value={user.heritage}
 				/>
 				<hr />
-				<label for="firstMet">
+				<label htmlFor="firstMet">
 					<h3>First Met</h3>
 				</label>
 				<input
@@ -277,7 +277,7 @@ export function getDefaultForm(handleSubmit, handleChange, user) {
 					value={user.firstMetVal}
 				/>
 				<hr />
-				<label for="lastSpoke">
+				<label htmlFor="lastSpoke">
 					<h3>Last Spoke</h3>
 				</label>
 				<input
@@ -288,7 +288,7 @@ export function getDefaultForm(handleSubmit, handleChange, user) {
 					value={user.lastSpokeVal}
 				/>
 				<hr />
-				<label for="name">
+				<label htmlFor="name">
 					<h3>Notes</h3>
 				</label>
 				<textarea
