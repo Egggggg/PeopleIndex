@@ -40,6 +40,7 @@ export default function UserInfo({ db, order }) {
 			<NavLink to={`/edit/${userId}`} className="btn btn-primary">
 				Edit
 			</NavLink>
+			<div style={{ height: "50px" }}></div>
 		</div>
 	);
 }
