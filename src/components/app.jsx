@@ -3,7 +3,7 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 import UserInfo from "./userInfo";
 import UserList from "./userList";
 import UserEditor from "./userEditor";
-import Form from "./form";
+import Add from "./add";
 import Navbar from "./navbar";
 
 const order = [
@@ -73,7 +73,7 @@ export default function App({ db }) {
 				<Route
 					path="add"
 					element={
-						<Form db={db} users={users} setusers={setUsers} order={order} />
+						<Add db={db} users={users} setusers={setUsers} order={order} />
 					}
 				></Route>
 				<Route
