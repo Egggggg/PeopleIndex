@@ -91,6 +91,7 @@ export async function selectUser(db, userId, order) {
 export function getDefaultFields(order) {
 	return {
 		name: "",
+		pronouns: "",
 		pseudonyms: "",
 		age: "",
 		birthDay: "",
@@ -144,17 +145,15 @@ export function exportData(db) {
 	};
 }
 
-export function getDefaultForm(
-	handleSubmit,
-	handleChange,
-	user,
-	children = null
-) {
+export function getDefaultForm(handleSubmit, handleChange, user) {
 	return (
 		<div>
 			<form onSubmit={handleSubmit}>
-				<h3>Name</h3>
+				<label for="name">
+					<h3>Name</h3>
+				</label>
 				<input
+					className="form-control"
 					type="text"
 					placeholder="Name"
 					name="name"
@@ -162,8 +161,23 @@ export function getDefaultForm(
 					value={user.name}
 				/>
 				<hr />
-				<h3>Other Names</h3>
+				<label for="pronouns">
+					<h3>Pronouns</h3>
+				</label>
 				<input
+					className="form-control"
+					type="text"
+					placeholder="Pronouns"
+					name="pronouns"
+					onChange={handleChange}
+					value={user.pronouns}
+				/>
+				<hr />
+				<label for="pseudonyms">
+					<h3>Other Names</h3>
+				</label>
+				<input
+					className="form-control"
 					type="text"
 					placeholder="Other Names"
 					name="pseudonyms"
@@ -171,8 +185,11 @@ export function getDefaultForm(
 					value={user.pseudonyms}
 				/>
 				<hr />
-				<h3>Age</h3>
+				<label for="age">
+					<h3>Age</h3>
+				</label>
 				<input
+					className="form-control"
 					type="number"
 					placeholder="Age"
 					name="age"
@@ -180,28 +197,44 @@ export function getDefaultForm(
 					value={user.age}
 				/>
 				<hr />
-				<h3>Birth Day and Month</h3>
-				<input
-					type="number"
-					placeholder="Birth Day"
-					name="birthDay"
-					onChange={handleChange}
-					max="31"
-					min="1"
-					value={user.birthDay}
-				/>
-				<input
-					type="number"
-					placeholder="Birth Month"
-					name="birthMonth"
-					onChange={handleChange}
-					max="12"
-					min="1"
-					value={user.birthMonth}
-				/>
+				<div className="row">
+					<div className="col">
+						<label for="birthDay">
+							<h3>Birth Day</h3>
+						</label>
+						<input
+							className="form-control"
+							type="number"
+							placeholder="Birth Day"
+							name="birthDay"
+							onChange={handleChange}
+							max="31"
+							min="1"
+							value={user.birthDay}
+						/>
+					</div>
+					<div className="col">
+						<label for="birthMonth">
+							<h3>Birth Month</h3>
+						</label>
+						<input
+							className="form-control"
+							type="number"
+							placeholder="Birth Month"
+							name="birthMonth"
+							onChange={handleChange}
+							max="12"
+							min="1"
+							value={user.birthMonth}
+						/>
+					</div>
+				</div>
 				<hr />
-				<h3>Religion</h3>
+				<label for="religion">
+					<h3>Religion</h3>
+				</label>
 				<input
+					className="form-control"
 					type="text"
 					placeholder="Religion"
 					name="religion"
@@ -209,8 +242,11 @@ export function getDefaultForm(
 					value={user.religion}
 				/>
 				<hr />
-				<h3>Nationality</h3>
+				<label for="nationality">
+					<h3>Nationality</h3>
+				</label>
 				<input
+					className="form-control"
 					type="text"
 					placeholder="Nationality"
 					name="nationality"
@@ -218,8 +254,11 @@ export function getDefaultForm(
 					value={user.nationality}
 				/>
 				<hr />
-				<h3>Heritage</h3>
+				<label for="heritage">
+					<h3>Heritage</h3>
+				</label>
 				<input
+					className="form-control"
 					type="text"
 					placeholder="Heritage"
 					name="heritage"
@@ -227,32 +266,41 @@ export function getDefaultForm(
 					value={user.heritage}
 				/>
 				<hr />
-				<h3>First Met</h3>
+				<label for="firstMet">
+					<h3>First Met</h3>
+				</label>
 				<input
+					className="form-control"
 					type="date"
 					name="firstMet"
 					onChange={handleChange}
 					value={user.firstMetVal}
 				/>
 				<hr />
-				<h3>Last Spoke</h3>
+				<label for="lastSpoke">
+					<h3>Last Spoke</h3>
+				</label>
 				<input
+					className="form-control"
 					type="date"
 					name="lastSpoke"
 					onInput={handleChange}
 					value={user.lastSpokeVal}
 				/>
 				<hr />
-				<h3>Notes</h3>
+				<label for="name">
+					<h3>Notes</h3>
+				</label>
 				<textarea
+					className="form-control"
 					placeholder="Notes"
 					name="notes"
 					onChange={handleChange}
 					value={user.notes}
 				/>
 				<hr />
-				{children}
 				<input type="submit" value="Submit" />
+				<div style={{ height: "50px" }}></div>
 			</form>
 		</div>
 	);
@@ -282,28 +330,22 @@ export function handleChange(user, setUser) {
 	};
 }
 
-export function handleSubmit(db, user, setUser, setUsers, order, redirect) {
+export function handleSubmit(db, user, setUsers, redirect) {
 	return async (e) => {
 		e.preventDefault();
 		await db.users.add(user);
 		setUsers(await getUserList(db));
-		clearData(setUser, order);
 		redirect();
 	};
 }
 
-export function handleUpdate(db, user, setUser, setUsers, order, redirect) {
+export function handleUpdate(db, user, setUsers, redirect) {
 	return async (e) => {
 		e.preventDefault();
 		await db.users.put(user);
 		setUsers(await getUserList(db));
-		clearData(setUser, order);
 		redirect();
 	};
-}
-
-export function clearData(setUser, order) {
-	setUser(getDefaultFields(order));
 }
 
 export async function getUser(db, userId) {
