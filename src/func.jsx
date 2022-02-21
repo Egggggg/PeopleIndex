@@ -305,3 +305,7 @@ export function handleUpdate(db, user, setUser, setUsers, order, redirect) {
 export function clearData(setUser, order) {
 	setUser(getDefaultFields(order));
 }
+
+export async function getUser(db, userId) {
+	return await db.users.get(parseInt(userId));
+}
