@@ -41,6 +41,7 @@ export async function getUserList(db) {
 function deleteUser(setUsers, db, userid) {
 	return async (e) => {
 		await db.users.delete(parseInt(userid));
+		setUsers(await getUserList);
 	};
 }
 
