@@ -291,6 +291,14 @@ export function handleSubmit(db, user, setUser, setUsers, order, redirect) {
 		redirect();
 	};
 }
+
+export function handleUpdate(db, user, setUser, setUsers, order, redirect) {
+	return async (e) => {
+		e.preventDefault();
+		await db.users.put(user);
+		setUsers(await getUserList(db));
+		clearData(setUser, order);
+		redirect();
 	};
 }
 
