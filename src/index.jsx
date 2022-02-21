@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import App from "./components/app";
 import Dexie from "dexie";
 
+import "./styles/index.css";
+
 class ErrorBoundary extends React.Component {
 	constructor(props) {
 		super(props);
